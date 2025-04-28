@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Campus Lost & Found</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!--font awesome link-->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="./frontend/styles/index.css" />
+  </head>
+  <body class="bg-light">
+    <!-- Navbar -->
+    <nav
+      class="navbar navbar-expand-lg navbar-light bg-white shadow-sm text-left"
+    >
+      <div class="container">
+        <a class="navbar-brand fw-bold text-indigo-600" href="#">Campus L&F</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto align-items-center">
+            <li class="nav-item">
+              <a onclick="viewItem()" class="nav-link text-dark" href="#"
+                >View Items</a
+              >
+            </li>
+            <li class="nav-item">
+              <a onclick="viewItem()" class="nav-link text-dark" href="#"
+                >Post Item</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="#">Login</a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="btn bg-indigo-600 text-white ms-2 hover-bg-indigo-700"
+                href="#"
+                >Register</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="py-5 text-center my-5">
+      <div class="container">
+        <h1 class="display-2 fw-bold text-dark">Campus Lost & Found</h1>
+        <span class="lead text-indigo-600 display-4 fw-bold">
+          Reuniting People with Their Belongings
+        </span>
+
+        <p class="text-muted mb-4 mt-3">
+          A platform dedicated to helping students and staff find their lost,
+          The easiest way to report and find lost items on campus.
+        </p>
+
+        <a onclick="viewItem()" href="#" class="btn btn-primary p-2 py-2">
+          <i class="bi bi-plus-circle"></i>
+          Report Found Item</a
+        >
+        <a
+          onclick="viewItem()"
+          href="#"
+          class="btn btn-outline-primary p-2 py-2 ms-2 text-indigo-700"
+        >
+          <i class="bi bi-search"></i>
+          Browse Lost Items
+        </a>
+      </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="bg-white rounded-3 shadow-sm p-5 mb-5 container">
+      <h2 class="text-center mb-4">Popular Categories</h2>
+      <div class="row text-center">
+        <div class="col-md-3 col-6 mb-4">
+          <div class="p-3 rounded hover-bg-indigo-50">
+            <div class="text-indigo-600 fs-2 mb-2">📱</div>
+            <div>Electronics</div>
+            <small class="text-muted">45 items</small>
+          </div>
+        </div>
+        <div class="col-md-3 col-6 mb-4">
+          <div class="p-3 rounded hover-bg-indigo-50">
+            <div class="text-indigo-600 fs-2 mb-2">📖</div>
+            <div>Books & Notes</div>
+            <small class="text-muted">32 items</small>
+          </div>
+        </div>
+        <div class="col-md-3 col-6 mb-4">
+          <div class="p-3 rounded hover-bg-indigo-50">
+            <div class="text-indigo-600 fs-2 mb-2">🏅</div>
+            <div>Personal Items</div>
+            <small class="text-muted">28 items</small>
+          </div>
+        </div>
+        <div class="col-md-3 col-6 mb-4">
+          <div class="p-3 rounded hover-bg-indigo-50">
+            <div class="text-indigo-600 fs-2 mb-2">🛡️</div>
+            <div>Cards & IDs</div>
+            <small class="text-muted">15 items</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="bg-white rounded-3 shadow-sm p-5 mb-5 container">
+      <div class="row text-center">
+        <div class="col-md-3 col-6 mb-4">
+          <h3 class="text-indigo-600">500+</h3>
+          <p class="text-muted">Items Found</p>
+        </div>
+        <div class="col-md-3 col-6 mb-4">
+          <h3 class="text-indigo-600">95%</h3>
+          <p class="text-muted">Success Rate</p>
+        </div>
+        <div class="col-md-3 col-6 mb-4">
+          <h3 class="text-indigo-600">1000+</h3>
+          <p class="text-muted">Active Users</p>
+        </div>
+        <div class="col-md-3 col-6 mb-4">
+          <h3 class="text-indigo-600">100%</h3>
+          <p class="text-muted">Campus Coverage</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="py-5 container">
+      <h2 class="text-center mb-5">Why Choose Our Platform?</h2>
+      <div class="row text-center">
+        <div class="col-md-4 py-2">
+          <div class="bg-white p-4 rounded-3 shadow-sm">
+            <div class="text-indigo-600 fs-2 mb-2">
+              <i class="bi bi-camera"></i>
+            </div>
+            <h5>Photo Recognition</h5>
+            <p class="text-muted">
+              Advanced image matching to help identify lost items quickly.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-4 py-3">
+          <div class="bg-white p-4 rounded-3 shadow-sm">
+            <div class="text-indigo-600 fs-2 mb-2">
+              <i class="bi bi-chat-dots"></i>
+            </div>
+            <h5>Secure Messaging</h5>
+            <p class="text-muted">
+              Safe communication between users through the platform.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="bg-white p-4 rounded-3 shadow-sm">
+            <div class="text-indigo-600 fs-2 mb-2">
+              <i class="bi bi-sign-railroad-fill"></i>
+            </div>
+            <h5>Item History</h5>
+            <p class="text-muted">
+              Track the journey of items from lost to returned.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- how it works -->
+    <section>
+      <div class="container py-5">
+        <h2 class="text-center mb-5">How It Works</h2>
+        <div class="row text-center">
+          <div class="col-md-4 mb-4">
+            <div class="bg-white p-4 rounded shadow-sm">
+              <div class="text-indigo-600 fs-2 mb-2">
+                <i class="bi bi-plus-circle"></i>
+              </div>
+              <h5>Report Found Item</h5>
+              <p class="text-muted">Submit details and photos of the item.</p>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="bg-white p-4 rounded shadow-sm">
+              <div class="text-indigo-600 fs-2 mb-2">
+                <i class="bi bi-search"></i>
+              </div>
+              <h5>Search for Lost Items</h5>
+              <p class="text-muted">
+                Browse through the list of reported lost items.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="bg-white p-4 rounded shadow-sm">
+              <div class="text-indigo-600 fs-2 mb-2">
+                <i class="bi bi-chat-dots"></i>
+              </div>
+              <h5>Connect with Owners</h5>
+              <p class="text-muted">
+                Use our secure messaging to contact the item owner.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="bg-white p-4 rounded shadow-sm">
+              <div class="text-indigo-600 fs-2 mb-2">
+                <i class="bi bi-check-circle"></i>
+              </div>
+              <h5>Return</h5>
+              <p class="text-muted">Safe and verified handover</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-5 bg-light">
+      <div class="container">
+        <h2 class="text-center mb-5">What Our Users Say</h2>
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <div class="bg-white p-4 rounded shadow-sm">
+              <p class="fst-italic text-muted">
+                "I found my lost laptop within hours of it being posted."
+              </p>
+              <p class="fw-bold mb-0">Sarah M.</p>
+              <small class="text-muted">Computer Science Student</small>
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <div class="bg-white p-4 rounded shadow-sm">
+              <p class="fst-italic text-muted">
+                "I've helped return three items to their owners!"
+              </p>
+              <p class="fw-bold mb-0">James L.</p>
+              <small class="text-muted">Campus Staff</small>
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <div class="bg-white p-4 rounded shadow-sm">
+              <p class="fst-italic text-muted">
+                "Got my lost keys back the same day."
+              </p>
+              <p class="fw-bold mb-0">Emily R.</p>
+              <small class="text-muted">Graduate Student</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!--contact info-->
+    <section class="py-5 bg-white">
+      <div class="container">
+        <h2 class="text-center mb-4">Need Assistance?</h2>
+        <p class="text-center text-muted mb-4">
+          If you have any questions or need help, feel free to reach out to us.
+        </p>
+        <div class="text-center">
+          <a href="mailto:support@campuslf.com" class="btn btn-primary">
+            <i class="bi bi-envelope"></i> Send Us a Message
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section py-3">
+      <div class="container">
+        <h2 class="section-title text-center">Frequently Asked Questions</h2>
+        <div class="accordion" id="faqAccordion">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+              <button
+                class="accordion-button"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseOne"
+              >
+                How do I post a found item?
+              </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show">
+              <div class="accordion-body">
+                Login to your account and click "Post Found Item" to fill in the
+                details.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseTwo"
+              >
+                Can I update or delete my post?
+              </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse">
+              <div class="accordion-body">
+                Yes, visit your dashboard to manage your posted items.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- CTA -->
+    <section class="py-5">
+      <div class="container bg-indigo-700 text-white text-center rounded-3 p-5">
+        <h2 class="mb-3">Ready to Help?</h2>
+        <p class="mb-4">
+          Join our community of helpful campus members. Report found items or
+          search for your lost belongings.
+        </p>
+        <a
+          href="./frontend/pages/login.html"
+          class="btn btn-light text-indigo-700 me-2"
+          >Get Started</a
+        >
+        <a onclick="viewItem()" href="#" class="btn btn-outline-light"
+          >Browse Items</a
+        >
+      </div>
+    </section>
+    <!--footer-->
+    <footer class="footer text-center">
+      <div class="container py-4 bg-light">
+        <p class="text-muted mb-0">
+          © 2025 Campus Lost & Found. Developed by Ibrahim Abdulkerim, All
+          rights reserved.
+        </p>
+      </div>
+    </footer>
+    <script src="./frontend/script/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

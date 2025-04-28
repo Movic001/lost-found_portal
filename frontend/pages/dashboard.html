@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Campus Lost and Found Portal</title>
+    <link rel="stylesheet" href="../styles/dashboard.css" />
+  </head>
+  <body>
+    <!--
+    <header>
+      <div class="navbar">
+        <div class="logo">Campus Lost & Found Portal</div>
+        <div class="hamburger" id="hamburger-menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+      <div class="mobile-men" id="mobile-menu">
+        <a href="#">Post Found Item</a>
+        <a href="#">View Lost Items</a>
+        <a href="#">View My Posts</a>
+        <a href="#">Account Settings</a>
+        <a href="#">Logout</a>
+      </div>
+    </header>
+
+    <div class="mobile-menu" id="mobile-menu">
+      <button class="close-menu" id="close-menu">✕</button>
+      <a href="#">Post Found Item</a>
+      <a href="#">View Lost Items</a>
+      <a href="#">View My Posts</a>
+      <a href="#">Account Settings</a>
+      <a href="#">Logout</a>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+  -->
+
+    <div class="sidebar">
+      <h3>User Profile</h3>
+      <p><strong>Name:</strong> Ibrahim</p>
+      <p><strong>Email:</strong> admin@gmail.com</p>
+      <p><strong>Role:</strong> User</p>
+      <button class="logout-btn">LogOut</button>
+    </div>
+
+    <div class="navbar">
+      <h1>Lost & Found Portal</h1>
+      <span class="toggle-btn" onclick="toggleSidebar()">☰</span>
+    </div>
+
+    <!--end of nav bar-->
+    <div class="container">
+      <div class="welcome-section">
+        <h1 class="welcome-message">Welcome, Ibrahim!</h1>
+        <div class="quick-actions">
+          <button class="action-btn">Post a Found Item</button>
+          <button class="action-btn">View Found Items</button>
+          <button class="action-btn">View My Posts</button>
+        </div>
+      </div>
+
+      <div class="stats-section">
+        <div class="stat-card">
+          <div class="stat-number">24</div>
+          <div class="stat-label">Total Items Found</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">16</div>
+          <div class="stat-label">Items Claimed</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">8</div>
+          <div class="stat-label">Still Unclaimed</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">3</div>
+          <div class="stat-label">Your Posts</div>
+        </div>
+      </div>
+
+      <h2 class="section-title">Recent Found Items</h2>
+      <div class="items-grid">
+        <div class="item-card">
+          <img
+            src="../assets/image/found_item_img/laptop.webp"
+            alt="Laptop"
+            class="item-image"
+          />
+          <div class="item-info">
+            <h3 class="item-name">MacBook Pro Laptop</h3>
+            <p class="item-category">Electronics</p>
+            <p class="item-details">Location: Library, 2nd Floor</p>
+            <p class="item-date">Found: April 23, 2025</p>
+            <div class="user-info">
+              <img
+                src="../assets/image/profile_img/profile 2.webp"
+                alt="User"
+                class="user-avatar"
+              />
+              <span>Posted by Ahmed</span>
+            </div>
+            <div class="item-actions">
+              <button class="btn btn-edit">Edit</button>
+              <button class="btn btn-claim">Claim</button>
+              <button class="btn btn-delete">Delete</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="item-card">
+          <img
+            src="../assets/image/found_item_img/water_bottle.webp"
+            alt="Water Bottle"
+            class="item-image"
+          />
+          <div class="item-info">
+            <h3 class="item-name">Blue Water Bottle</h3>
+            <p class="item-category">Personal Items</p>
+            <p class="item-details">Location: Gym</p>
+            <p class="item-date">Found: April 22, 2025</p>
+            <div class="user-info">
+              <img
+                src="../assets/image/profile_img/profile 3.webp"
+                alt="User"
+                class="user-avatar"
+              />
+              <span>Posted by Sarah</span>
+            </div>
+            <div class="item-actions">
+              <button class="btn btn-edit">Edit</button>
+              <button class="btn btn-claim">Claim</button>
+              <button class="btn btn-delete">Delete</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="item-card">
+          <img
+            src="../assets/image/found_item_img/id_card.jpg"
+            alt="ID Card"
+            class="item-image"
+          />
+          <div class="item-info">
+            <h3 class="item-name">Student ID Card</h3>
+            <p class="item-category">Identification</p>
+            <p class="item-details">Location: Cafeteria</p>
+            <p class="item-date">Found: April 21, 2025</p>
+            <div class="user-info">
+              <img
+                src="../assets/image/profile_img/profile 4.webp"
+                alt="User"
+                class="user-avatar"
+              />
+              <span>Posted by You</span>
+            </div>
+            <div class="item-actions">
+              <button class="btn btn-edit">Edit</button>
+              <button class="btn btn-claim">Claim</button>
+              <button class="btn btn-delete">Delete</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="item-card">
+          <img
+            src="../assets/image/found_item_img/keys.webp"
+            alt="Keys"
+            class="item-image"
+          />
+          <div class="item-info">
+            <h3 class="item-name">Keys with USB Drive</h3>
+            <p class="item-category">Personal Items</p>
+            <p class="item-details">Location: Computer Lab</p>
+            <p class="item-date">Found: April 20, 2025</p>
+            <div class="user-info">
+              <img
+                src="../assets/image/profile_img/profile.webp"
+                alt="User"
+                class="user-avatar"
+              />
+              <span>Posted by barry</span>
+            </div>
+            <div class="item-actions">
+              <button class="btn btn-edit">Edit</button>
+              <button class="btn btn-claim">Claim</button>
+              <button class="btn btn-delete">Delete</button>
+            </div>
+          </div>
+        </div>
+        <div class="item-card">
+          <img
+            src="../assets/image/found_item_img/water_bottle.webp"
+            alt="Keys"
+            class="item-image"
+          />
+          <div class="item-info">
+            <h3 class="item-name">water bottle</h3>
+            <p class="item-category">Personal Items</p>
+            <p class="item-details">Location: Computer Lab</p>
+            <p class="item-date">Found: April 20, 2025</p>
+            <div class="user-info">
+              <img
+                src="../assets/image/profile_img/profile.webp"
+                alt="User"
+                class="user-avatar"
+              />
+              <span>Posted by barry</span>
+            </div>
+            <div class="item-actions">
+              <button class="btn btn-edit">Edit</button>
+              <button class="btn btn-claim">Claim</button>
+              <button class="btn btn-delete">Delete</button>
+            </div>
+          </div>
+        </div>
+        <div class="item-card">
+          <img
+            src="../assets/image/found_item_img/laptop.webp"
+            alt="Keys"
+            class="item-image"
+          />
+          <div class="item-info">
+            <h3 class="item-name">laptop</h3>
+            <p class="item-category">Personal Items</p>
+            <p class="item-details">Location: Computer Lab</p>
+            <p class="item-date">Found: April 20, 2025</p>
+            <div class="user-info">
+              <img
+                src="../assets/image/profile_img/profile.webp"
+                alt="User"
+                class="user-avatar"
+              />
+              <span>Posted by barry</span>
+            </div>
+            <div class="item-actions">
+              <button class="btn btn-edit">Edit</button>
+              <button class="btn btn-claim">Claim</button>
+              <button class="btn btn-delete">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>© 2025 Campus Lost & Found Portal | Developed by Ibrahim Abdulkerim</p>
+    </footer>
+    <script src="../script/dashboard.js"></script>
+    <script>
+      function toggleSidebar() {
+        document.querySelector(".sidebar").classList.toggle("active");
+      }
+    </script>
+  </body>
+</html>
