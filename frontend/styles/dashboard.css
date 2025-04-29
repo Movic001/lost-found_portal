@@ -79,6 +79,9 @@ header {
   margin-bottom: 10px;
   color: #555;
 }
+.sidebar .user {
+  margin-top: 190%;
+}
 
 .logout-btn {
   background-color: #e74c3c;

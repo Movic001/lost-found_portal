@@ -41,13 +41,13 @@ function loginButton() {
     showPopup("Login successful!");
     setTimeout(() => {
       window.location.href = "../../frontend/pages/dashboard.html"; // Redirect to the dashboard page
-    }, 3000); // Redirect after 3 seconds
+    }, 2000); // Redirect after 3 seconds
   }
   // If the user does not exist, show an error message and redirect to the login page
   else {
     showPopup("Invalid Email or password.");
     setTimeout(() => {
       window.location.href = "../../frontend/pages/login.html"; // Redirect to the login page
-    }, 3000); // Redirect after 3 seconds
+    }, 2000); // Redirect after 3 seconds
   }
 }

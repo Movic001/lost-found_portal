@@ -32,7 +32,7 @@ body {
 .navbar h1 {
   font-size: 20px;
 }
-.navbar .toggle_back a {
+.navbar a {
   text-decoration: none;
   color: white;
   font-size: 20px;
