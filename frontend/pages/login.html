@@ -13,13 +13,15 @@
         <div class="tab" id="admin-tab">Admin</div>
       </div>
       <div class="form-container">
+        <!-- User Login Form -->
         <div class="form-section user-form active">
           <h2>User Login</h2>
-          <form id="loginForm">
+          <form action="/server/routes/loginRoute.php" method="POST">
             <div class="input-group">
               <input
                 type="email"
                 id="userEmail"
+                name="email"
                 placeholder="Email address"
                 required
               />
@@ -28,26 +30,30 @@
               <input
                 type="password"
                 id="userPassword"
+                name="password"
                 placeholder="Password"
                 required
               />
               <a href="#" class="forgot-password">Forgot password?</a>
             </div>
             <p id="popup" class="popup-message"></p>
-            <button type="submit" id="submit">Login</button>
+            <button type="submit" name="login">Login</button>
             <div class="register-link">
               Don't have an account?
               <a href="../pages/register.html">Register</a>
             </div>
           </form>
         </div>
+
+        <!-- Admin Login Form -->
         <div class="form-section admin-form">
           <h2>Admin Login</h2>
-          <form id="admin-login-form">
+          <form action="/server/routes/loginRoute.php" method="POST">
             <div class="input-group">
               <input
                 type="text"
                 id="adminEmail"
+                name="email"
                 placeholder="Admin Email"
                 required
               />
@@ -56,13 +62,14 @@
               <input
                 type="password"
                 id="adminPassword"
+                name="password"
                 placeholder="Password"
                 required
               />
               <a href="#" class="forgot-password">Forgot password?</a>
             </div>
             <p id="admin_popup_message" class="popup-message"></p>
-            <button type="submit" id="adminloginbtn">Login as Admin</button>
+            <button type="submit" name="admin_login">Login as Admin</button>
           </form>
         </div>
       </div>
