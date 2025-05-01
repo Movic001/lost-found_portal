@@ -1,36 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Login - Lost & Found</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../styles/login.css">
-</head>
-
-<body>
-    <div class="navbar">
-        <h1>Lost & Found</h1>
-
-        <span class="toggle_back"><a href='/index.html'>
-                <<< </a></span>
-
-    </div>
-    <div class="login-container">
-        <h2>Login</h2>
-        <form id="loginForm" method="POST" onsubmit="return false;">
-            <input id="userEmail" type="email" name="email" placeholder="Email address" required autocomplete="additional-name">
-            <input id="userPassword" type="password" name="password" placeholder="Password" required>
-            <p id="popup" class="popup hidden"></p> <!-- Popup message -->
-            <button id="loginbtn" type="submit">Login</button>
-        </form>
-        <div>
-            <div class="register-link">
-                Don't have an account? <a href="/frontend/pages/register.html">Register</a>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../styles/login.css" />
+    <title>Login Form with Admin Section</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="tabs">
+        <div class="tab active" id="user-tab">User Login</div>
+        <div class="tab" id="admin-tab">Admin</div>
+      </div>
+      <div class="form-container">
+        <div class="form-section user-form active">
+          <h2>User Login</h2>
+          <form id="loginForm">
+            <div class="input-group">
+              <input
+                type="email"
+                id="userEmail"
+                placeholder="Email address"
+                required
+              />
             </div>
+            <div class="input-group">
+              <input
+                type="password"
+                id="userPassword"
+                placeholder="Password"
+                required
+              />
+              <a href="#" class="forgot-password">Forgot password?</a>
+            </div>
+            <p id="popup" class="popup-message"></p>
+            <button type="submit" id="submit">Login</button>
+            <div class="register-link">
+              Don't have an account?
+              <a href="../pages/register.html">Register</a>
+            </div>
+          </form>
         </div>
-        
-<script src="../script/login.js"></script>
-</body>
-
+        <div class="form-section admin-form">
+          <h2>Admin Login</h2>
+          <form id="admin-login-form">
+            <div class="input-group">
+              <input
+                type="text"
+                id="adminEmail"
+                placeholder="Admin Email"
+                required
+              />
+            </div>
+            <div class="input-group">
+              <input
+                type="password"
+                id="adminPassword"
+                placeholder="Password"
+                required
+              />
+              <a href="#" class="forgot-password">Forgot password?</a>
+            </div>
+            <p id="admin_popup_message" class="popup-message"></p>
+            <button type="submit" id="adminloginbtn">Login as Admin</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script src="../script/login.js"></script>
+    <script src="../script/adminlogin.js"></script>
+  </body>
 </html>

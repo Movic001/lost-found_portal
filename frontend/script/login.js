@@ -23,7 +23,9 @@ function showPopup(message) {
   }, 2000); // Hide the popup after 2 seconds
 }
 
-function loginButton() {
+function loginButton(event) {
+  event.preventDefault(); // Prevent the default form submission
+  // Get the values from the input fields
   const email = userEmail.value;
   const password = userPassword.value;
 
@@ -51,3 +53,22 @@ function loginButton() {
     }, 2000); // Redirect after 3 seconds
   }
 }
+
+const userTab = document.getElementById("user-tab");
+const adminTab = document.getElementById("admin-tab");
+const userForm = document.querySelector(".user-form");
+const adminForm = document.querySelector(".admin-form");
+
+userTab.addEventListener("click", () => {
+  userTab.classList.add("active");
+  adminTab.classList.remove("active");
+  userForm.classList.add("active");
+  adminForm.classList.remove("active");
+});
+
+adminTab.addEventListener("click", () => {
+  adminTab.classList.add("active");
+  userTab.classList.remove("active");
+  adminForm.classList.add("active");
+  userForm.classList.remove("active");
+});
