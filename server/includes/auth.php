@@ -8,7 +8,3 @@ if (!isset($_SESSION['user_id'])) {
     echo "<script>alert('Please log in first!'); window.location.href='../../frontend/pages/login.html';</script>";
     exit;
 }
-if ($_SESSION['user_role'] !== 'admin') {
-    echo "<script>alert('You do not have permission to access this page!'); window.location.href='../../frontend/pages/login.html';</script>";
-    exit;
-}

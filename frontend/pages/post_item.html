@@ -19,7 +19,11 @@
 
     <div class="form-container">
       <h2>Post Found Item</h2>
-      <form action="#" method="POST">
+      <form
+        action="/server/routes/postItem.php"
+        method="POST"
+        enctype="multipart/form-data"
+      >
         <input type="text" name="item_name" placeholder="Item Name" required />
         <input type="text" name="category" placeholder="Category" required />
         <textarea
@@ -48,6 +52,15 @@
           required
         />
         <input type="file" name="image_path" accept="image/*" />
+
+        <!-- Unique Question field -->
+        <input
+          type="text"
+          name="unique_question"
+          placeholder="Unique Question"
+          required
+        />
+
         <button type="submit" name="postItem">Submit Found Item</button>
       </form>
     </div>

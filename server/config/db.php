@@ -40,3 +40,30 @@ try {
 } catch (PDOException $e) {
     echo "<br>failed to create table: " . $e->getMessage();
 }
+
+
+
+// Modify the table to include unique question and answer
+$sql = "CREATE TABLE IF NOT EXISTS found_items  (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    item_name VARCHAR(255) NOT NULL,
+    category VARCHAR(100) NOT NULL,
+    description TEXT NOT NULL,
+    location_found VARCHAR(255) NOT NULL,
+    date_found DATE NOT NULL,
+    person_name VARCHAR(100) NOT NULL,
+    contact_info VARCHAR(100) NOT NULL,
+    image_path VARCHAR(255),
+    unique_question VARCHAR(255) NOT NULL, 
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)";
+
+// Execute the query
+try {
+    $db->exec($sql);
+    //set an alert message to be displayed on the page
+    //echo "<script>alert('Table found_items created successfully!');</script>";
+} catch (PDOException $e) {
+    echo "<br>failed to create table: " . $e->getMessage();
+}
