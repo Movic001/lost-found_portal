@@ -80,7 +80,55 @@ header {
   color: #555;
 }
 .sidebar .user {
-  margin-top: 190%;
+  margin-top: 10%;
+}
+
+.user-profile {
+  background-color: #e5e8eb;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  position: relative;
+}
+
+.user-profile:hover {
+  background-color: #dfe6ec;
+}
+
+.user-profile h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-profile h3::after {
+  content: "▼";
+  font-size: 12px;
+  transition: transform 0.3s;
+}
+
+.user-profile.active h3::after {
+  transform: rotate(180deg);
+}
+
+.dropdown-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+
+.user-profile.active .dropdown-content {
+  max-height: 200px;
+  transition: max-height 0.5s ease-in;
+}
+
+.dropdown-content p {
+  margin: 8px 0;
+  font-size: 17px;
 }
 
 .logout-btn {

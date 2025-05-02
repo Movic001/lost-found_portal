@@ -111,16 +111,17 @@ class FoundItem
 
 
 
-    // method to get all item 
+    // method to get only approved items 
     public function getAllItems()
     {
-        $stmt = $this->db->query("SELECT * FROM found_items ORDER BY created_at DESC");
+        $stmt = $this->db->query("SELECT * FROM found_items WHERE status = 'approved' ORDER BY created_at DESC");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    // Search only approved items
     public function searchItems($searchTerm)
     {
-        $stmt = $this->db->prepare("SELECT * FROM found_items WHERE item_name LIKE :searchTerm OR category LIKE :searchTerm");
+        $stmt = $this->db->prepare("SELECT * FROM found_items  WHERE status = 'approved'  AND (item_name LIKE :searchTerm OR category LIKE :searchTerm)");
         $stmt->execute([':searchTerm' => '%' . $searchTerm . '%']);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

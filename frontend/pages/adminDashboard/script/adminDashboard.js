@@ -61,3 +61,47 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
+
+//display full details of the item in a modal
+// Get the modal element
+function openModal(item) {
+  document.getElementById("modalItemName").textContent = item.item_name;
+  document.getElementById("modalItemImage").src = "../uploads/" + item.image;
+  document.getElementById("modalItemLocation").textContent = item.location;
+  document.getElementById("modalItemDate").textContent = item.date_found;
+  document.getElementById("modalItemDescription").textContent =
+    item.description;
+  document.getElementById("modalContactName").textContent = item.contact_name;
+  document.getElementById("modalContactEmail").textContent = item.contact_email;
+
+  document.getElementById("itemModal").style.display = "block";
+}
+
+function closeModal() {
+  document.getElementById("itemModal").style.display = "none";
+}
+
+// function openModal(
+//   itemName,
+//   status,
+//   location,
+//   date,
+//   imagePath,
+//   personName,
+//   contact
+// ) {
+//   document.getElementById("modalItemName").innerText = itemName;
+//   document.getElementById("modalStatus").innerText = status;
+//   document.getElementById("modalLocation").innerText = location;
+//   document.getElementById("modalDate").innerText = date;
+//   document.getElementById("modalImage").src = `../../../uploads/${imagePath}`;
+//   document.getElementById(
+//     "modalContact"
+//   ).innerText = `${personName} (${contact})`;
+
+//   document.getElementById("itemModal").style.display = "flex";
+// }
+
+// function closeModal() {
+//   document.getElementById("itemModal").style.display = "none";
+// }

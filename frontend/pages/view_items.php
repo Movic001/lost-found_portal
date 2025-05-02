@@ -12,7 +12,7 @@ $searchQuery = isset($_GET['search']) ? $_GET['search'] : '';
 if (!empty($searchQuery)) {
   $items = $foundItem->searchApprovedItems($searchQuery);
 } else {
-  $items = $foundItem->getAllApprovedItems();
+  $items = $foundItem->getAllItems();
 }
 
 if (!empty($searchQuery) && empty($items)) {

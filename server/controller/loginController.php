@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if ($user->login($email, $password)) {
         if ($_SESSION['user_role'] === 'admin') {
             // Redirect to admin dashboard or success page
-            echo "<script>alert('Login succesfully.');window.location.href='../../frontend/pages/adminDashboard/pages/adminDashboard.html';</script>";
+            echo "<script>alert('Login succesfully.');window.location.href='../../frontend/pages/adminDashboard/pages/adminDashboard.php';</script>";
             // include('../../frontend/status/admin_login_success.html');
         } else {
             // Redirect to user home page or success page
