@@ -51,7 +51,7 @@ function openModal(item) {
   //   ? `/frontend/uploads/${item.image_path}`
   //   : "";
   document.getElementById("modalItemImage").src = item.image_path
-    ? `../../uploads/${item.image_path}`
+    ? `/../../../../frontend/uploads/${item.image_path}`
     : "";
 
   document.getElementById("modalItemLocation").textContent =

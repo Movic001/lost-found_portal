@@ -58,8 +58,10 @@ class FoundItem
         if (!is_dir($targetDir)) {
             mkdir($targetDir, 0777, true);
         }
-
-        $targetFile = $targetDir . basename($image["name"]);
+        // Check if the file is an image and get its properties
+        $imageName = basename($image["name"]);
+        //$targetFile = $targetDir . basename($image["name"]);
+        $targetFile = $targetDir . $imageName; // Use the original name for the file
         $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
         // Check if image file is a valid image
@@ -82,7 +84,8 @@ class FoundItem
 
         // Try to upload the file
         if (move_uploaded_file($image["tmp_name"], $targetFile)) {
-            return $targetFile;
+            return $imageName; // ✅ return just the filename
+            //return $targetFile;
         } else {
             echo "Sorry, there was an error uploading your file.";
             return false;
