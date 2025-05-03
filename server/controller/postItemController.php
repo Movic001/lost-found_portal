@@ -25,7 +25,7 @@ class PostItemController
 
             if ($result) {
                 // If item posted successfully, include success message
-                echo "<script>alert('Item posted successfully!'); window.location.href='../../frontend/pages/dashboard.html'; </script>";
+                echo "<script>alert('Item posted successfully! Wait for an admin to approve your post!'); window.location.href='../../frontend/pages/dashboard.html'; </script>";
                 //include('../../frontend/status/post_success_message.html');
             } else {
                 throw new Exception("❌ Failed to post item.");

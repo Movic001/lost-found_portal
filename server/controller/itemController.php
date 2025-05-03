@@ -14,14 +14,14 @@ class ItemController
     public function approveItem($id)
     {
         $this->itemModel->updateStatus($id, 'approved');
-        header("Location: ../admin/adminDashboard.php");
+        header("Location: ../adminDashboard/adminDashboard.php");
         exit;
     }
 
     public function rejectItem($id)
     {
         $this->itemModel->updateStatus($id, 'rejected');
-        header("Location: ../admin/adminDashboard.php");
+        header("Location: ../adminDashboard/adminDashboard.php");
         exit;
     }
 }

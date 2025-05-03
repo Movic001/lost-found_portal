@@ -19,18 +19,6 @@ $items = $itemModel->getAllItems();
 </head>
 
 <body>
-  <div id="itemModal" class="modal" style="display:none;">
-    <div class="modal-content">
-      <span class="close-modal" onclick="closeModal()">×</span>
-      <h2 id="modalItemName"></h2>
-      <img id="modalItemImage" src="" alt="Item Image" style="max-width: 100%; height: auto;" />
-      <p><strong>Location:</strong> <span id="modalItemLocation"></span></p>
-      <p><strong>Date Found:</strong> <span id="modalItemDate"></span></p>
-      <p><strong>Description:</strong> <span id="modalItemDescription"></span></p>
-      <p><strong>Contact Name:</strong> <span id="modalContactName"></span></p>
-      <p><strong>Contact Email:</strong> <span id="modalContactEmail"></span></p>
-    </div>
-  </div>
 
 
   <div class="container">
@@ -139,6 +127,7 @@ $items = $itemModel->getAllItems();
             <th>ITEM</th>
             <th>STATUS</th>
             <th>VIEW</th>
+            <th>ACTION</th>
           </tr>
         </thead>
         <tbody>
@@ -267,6 +256,23 @@ $items = $itemModel->getAllItems();
     </div>
   </div>
 
-</body>
 
-</html>
+
+  <div id="itemModal" class="modal" style="display:none;">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeModal()">×</span>
+      <h2 id="modalItemName"></h2>
+      <img id="modalItemImage" src="" alt="Item Image" style="max-width: 100%; height: auto;" />
+      <p><strong>Location:</strong> <span id="modalItemLocation"></span></p>
+      <p><strong>Date Found:</strong> <span id="modalItemDate"></span></p>
+      <p><strong>Description:</strong> <span id="modalItemDescription"></span></p>
+      <p><strong>Contact Name:</strong> <span id="modalContactName"></span></p>
+      <p><strong>Contact Phone:</strong> <span id="modalContactEmail"></span></p>
+      <p><strong>Unique Question:</strong> <span id="modalUniqueQuestion"></span></p>
+
+    </div>
+  </div>
+
+  <script src="../script/adminDashboard.js"></script>
+</body>
+< /html>

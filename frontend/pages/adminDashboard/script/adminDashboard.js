@@ -42,37 +42,30 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   });
-
-  // Add event listeners for action buttons
-  const actionBtns = document.querySelectorAll(".action-btn");
-  actionBtns.forEach((btn) => {
-    btn.addEventListener("click", function (e) {
-      e.preventDefault();
-
-      // You can add actual functionality here
-      const action = this.classList.contains("approve-btn")
-        ? "approved"
-        : "rejected";
-      const row = this.closest("tr");
-      const item = row.cells[0].textContent;
-
-      // For demo purposes, just show an alert
-      alert(`Item "${item}" has been ${action}`);
-    });
-  });
 });
 
-//display full details of the item in a modal
-// Get the modal element
+// Function to fetch and display items
 function openModal(item) {
-  document.getElementById("modalItemName").textContent = item.item_name;
-  document.getElementById("modalItemImage").src = "../uploads/" + item.image;
-  document.getElementById("modalItemLocation").textContent = item.location;
-  document.getElementById("modalItemDate").textContent = item.date_found;
+  document.getElementById("modalItemName").textContent = item.item_name || "";
+  // document.getElementById("modalItemImage").src = item.image_path
+  //   ? `/frontend/uploads/${item.image_path}`
+  //   : "";
+  document.getElementById("modalItemImage").src = item.image_path
+    ? `../../uploads/${item.image_path}`
+    : "";
+
+  document.getElementById("modalItemLocation").textContent =
+    item.location_found || "";
+  document.getElementById("modalItemDate").textContent = item.date_found || "";
   document.getElementById("modalItemDescription").textContent =
-    item.description;
-  document.getElementById("modalContactName").textContent = item.contact_name;
-  document.getElementById("modalContactEmail").textContent = item.contact_email;
+    item.description || "";
+  document.getElementById("modalContactName").textContent =
+    item.person_name || "";
+  document.getElementById("modalContactEmail").textContent =
+    item.contact_info || "";
+
+  document.getElementById("modalUniqueQuestion").textContent =
+    item.unique_question || "";
 
   document.getElementById("itemModal").style.display = "block";
 }
@@ -81,27 +74,10 @@ function closeModal() {
   document.getElementById("itemModal").style.display = "none";
 }
 
-// function openModal(
-//   itemName,
-//   status,
-//   location,
-//   date,
-//   imagePath,
-//   personName,
-//   contact
-// ) {
-//   document.getElementById("modalItemName").innerText = itemName;
-//   document.getElementById("modalStatus").innerText = status;
-//   document.getElementById("modalLocation").innerText = location;
-//   document.getElementById("modalDate").innerText = date;
-//   document.getElementById("modalImage").src = `../../../uploads/${imagePath}`;
-//   document.getElementById(
-//     "modalContact"
-//   ).innerText = `${personName} (${contact})`;
-
-//   document.getElementById("itemModal").style.display = "flex";
-// }
-
-// function closeModal() {
-//   document.getElementById("itemModal").style.display = "none";
-// }
+// Optional: Close modal when clicking outside
+window.onclick = function (event) {
+  const modal = document.getElementById("itemModal");
+  if (event.target === modal) {
+    closeModal();
+  }
+};
