@@ -75,6 +75,11 @@ class FoundItem
             echo "Sorry, your file is too large.";
             return false;
         }
+        // Check if file already exists (optional)
+        // if (file_exists($targetFile)) {
+        //     echo "Sorry, file already exists.";
+        //     return false;
+        // }
 
         // Allow certain file formats
         if (!in_array($imageFileType, ['jpg', 'jpeg', 'png', 'gif'])) {

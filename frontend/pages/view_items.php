@@ -33,7 +33,9 @@ if (!empty($searchQuery) && empty($items)) {
 
 <body>
   <div class="navbar">
-    <h1>Found Items</h1>
+    <a href="./dashboard.html">
+      <h1>Found Items</h1>
+    </a>
     <div class="search-bar">
       <form method="GET" action="">
         <input
@@ -66,8 +68,8 @@ if (!empty($searchQuery) && empty($items)) {
 
           <div class="item-actions">
             <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == $item['user_id']): ?>
-              <a href="edit_item.php?id=<?php echo $item['id']; ?>" class="btn btn-edit">Edit</a>
-              <a href="../../backend/routes/deleteItem.php?id=<?php echo $item['id']; ?>" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this item?')">Delete</a>
+              <a href="./editItem.php?id=<?= $item['id'] ?>" class="btn btn-edit">Edit</a>
+              <a href="../../server/routes/deleteRoute.php?id=<?php echo $item['id']; ?>" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this item?')">Delete</a>
             <?php else: ?>
               <a href="claim_item.php?id=<?php echo $item['id']; ?>" class="btn btn-claim">Claim</a>
             <?php endif; ?>

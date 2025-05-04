@@ -1,7 +1,5 @@
 <?php
 // routes/item_routes.php
-
-
 require_once '../config/db.php';
 require_once '../controller/itemController.php';
 
@@ -19,3 +17,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
 }
 // Redirect to the admin dashboard after processing the request
+// header("Location: ../../frontend/pages/adminDashboard/pages/adminDashboard.php");
+// exit;
