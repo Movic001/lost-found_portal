@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             // include('../../frontend/status/admin_login_success.html');
         } else {
             // Redirect to user home page or success page
-            echo "<script>alert('Login succesfully.');window.location.href='../../frontend/pages/dashboard.html';</script>";
+            echo "<script>alert('Login succesfully.');window.location.href='../../frontend/pages/dashboard.php';</script>";
             // include('../../frontend/status/user_login_success.html');
         }
     } else {
