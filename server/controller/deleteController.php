@@ -1,6 +1,10 @@
 <?php
 require_once(__DIR__ . '/../config/db.php');
 
+// Initialize the database connection
+$database = new Database();
+$db = $database->connect();
+
 class DeleteItemController
 {
     private $db;

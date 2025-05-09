@@ -1,6 +1,6 @@
 <?php
 // controller/ItemController.php
-require_once '../model/item_class.php';
+require_once '../classes/item_class.php';
 
 class ItemController
 {
