@@ -1,8 +1,12 @@
 <?php
 session_start();
 require_once(__DIR__ . '/../config/db.php');
-require_once(__DIR__ . '/../model/user.php');
+require_once(__DIR__ . '/../classes/user.php');
 // Using the existing User model
+//intialize the database connection
+$database = new Database();
+$db = $database->connect();
+// Check if the connection was successful
 
 $user = new User($db);
 

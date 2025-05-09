@@ -1,5 +1,8 @@
 <?php
 require_once(__DIR__ . '/../config/db.php');
+//intialize the database connection
+$database = new Database();
+$db = $database->connect();
 
 if (session_status() == PHP_SESSION_NONE) {
     session_start(); // Only start the session if it's not already active

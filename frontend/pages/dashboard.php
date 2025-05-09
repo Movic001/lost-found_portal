@@ -1,9 +1,11 @@
 <?php
 session_start();
 require_once('../../server/config/db.php');
-require_once(__DIR__ . '/../../server/model/postItem_class.php');
+require_once(__DIR__ . '/../../server/classes/postItem_class.php');
 require_once('../../server/includes/auth.php');
 
+$database = new Database();
+$db = $database->connect(); // ✅ Get the PDO connection
 
 
 $foundItem = new FoundItem($db);
@@ -49,7 +51,7 @@ $items = $foundItem->getAllItems();
 
       </div>
       <form action="../../server/routes/logOut.php" method="POST">
-        <button class="logout-btn">
+        <button class="logout-btn" type="submit" name="logOut">
           <i class="fas fa-sign-out-alt"></i> Logout
         </button>
       </form>
@@ -135,7 +137,7 @@ $items = $foundItem->getAllItems();
           <div class="item-info">
             <h3 class="item-name"><?php echo $item['item_name']; ?></h3>
             <p class="item-category"><?php echo $item['category']; ?></p>
-            <p class="item-details">Location: <?php echo $item['location_found']; ?></p>
+
             <p class="item-date">Found: <?php echo $item['date_found']; ?></p>
             <div class="user-info">
               <img src="../assets/image/profile_img/profile.webp" alt="User" class="user-avatar" />
@@ -146,13 +148,17 @@ $items = $foundItem->getAllItems();
               <!-- check if the user is the owner of the post-->
               <?php if ($item['user_id'] === $_SESSION['user_id']): ?>
                 <a href="edit_item.php?id=<?php echo $item['id']; ?>"><button class="btn btn-edit">Edit</button></a>
-                <form method="POST" action="delete_item.php" style="display:inline;">
+                <form method="POST" action="../../server/routes/deleteRoute.php" style="display:inline;">
                   <input type="hidden" name="item_id" value="<?php echo $item['id']; ?>">
                   <button class="btn btn-delete" onclick="return confirm('Delete this item?')">Delete</button>
                 </form>
               <?php else: ?>
                 <form method="POST" action="claim_item.php" style="display:inline;">
                   <input type="hidden" name="item_id" value="<?php echo $item['id']; ?>">
+
+                  <a href="./claim.php?id=<?php echo $item['id']; ?>">
+                    <button class="btn btn-view">View</button>
+                  </a>
                   <button class="btn btn-claim" onclick="return confirm('Are you the owner?')">Claim</button>
                 </form>
               <?php endif; ?>

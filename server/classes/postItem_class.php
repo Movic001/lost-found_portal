@@ -7,13 +7,18 @@ require_once(__DIR__ . '/../config/db.php');  // Include the database configurat
 
 require_once(__DIR__ . '/../includes/auth.php'); // Include the class file
 
+//initialize the database connection
+$database = new Database();
+$db = $database->connect(); // ✅ Use $db for database connection
+
 class FoundItem
 {
-    private $db;
+    // ✅ Use $conn instead of $db to avoid confusion and ensure correct usage
+    private $conn;
 
-    public function __construct($dbConn)
+    public function __construct($db)
     {
-        $this->db = $dbConn;
+        $this->conn = $db; // ✅ Assign db connection to $conn
     }
 
     // Method to post found item into the database
@@ -25,9 +30,10 @@ class FoundItem
 
             // Prepare SQL statement to insert the item details into the database
             $sql = "INSERT INTO found_items (user_id, item_name, category, description, location_found, date_found, person_name, contact_info, image_path, unique_question, created_at)
-                    VALUES (:user_id, :item_name, :category, :description, :location_found, :date_found, :person_name, :contact_info, :image_path, :unique_question, NOW())";
+                VALUES (:user_id, :item_name, :category, :description, :location_found, :date_found, :person_name, :contact_info, :image_path, :unique_question, NOW())";
 
-            $stmt = $this->db->prepare($sql);
+            // ✅ FIXED: use $this->conn instead of $this->db
+            $stmt = $this->conn->prepare($sql);
 
             // Execute SQL query with form data
             $stmt->execute([
@@ -54,13 +60,13 @@ class FoundItem
     public function uploadImage($image)
     {
         $targetDir = __DIR__ . '/../../frontend/uploads/';
+
         // Check if the directory exists, if not create it
         if (!is_dir($targetDir)) {
             mkdir($targetDir, 0777, true);
         }
-        // Check if the file is an image and get its properties
+
         $imageName = basename($image["name"]);
-        //$targetFile = $targetDir . basename($image["name"]);
         $targetFile = $targetDir . $imageName; // Use the original name for the file
         $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
@@ -75,11 +81,6 @@ class FoundItem
             echo "Sorry, your file is too large.";
             return false;
         }
-        // Check if file already exists (optional)
-        // if (file_exists($targetFile)) {
-        //     echo "Sorry, file already exists.";
-        //     return false;
-        // }
 
         // Allow certain file formats
         if (!in_array($imageFileType, ['jpg', 'jpeg', 'png', 'gif'])) {
@@ -89,48 +90,55 @@ class FoundItem
 
         // Try to upload the file
         if (move_uploaded_file($image["tmp_name"], $targetFile)) {
-            return $imageName; // ✅ return just the filename
-            //return $targetFile;
+            return $imageName; // ✅ Only filename is returned to store in DB
         } else {
             echo "Sorry, there was an error uploading your file.";
             return false;
         }
     }
 
-    // Method to get all found items from the database
+    // Method to get all approved items
     public function getAllApprovedItems()
     {
         $query = "SELECT * FROM found_items WHERE is_approved = 1 ORDER BY date_found DESC";
-        $stmt = $this->db->prepare($query);
+
+        // ✅ FIXED: using $this->conn for prepare
+        $stmt = $this->conn->prepare($query);
         $stmt->execute();
+
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    // Method to get all found items for admin review
+
+    // Search approved items by keyword
     public function searchApprovedItems($keyword)
     {
         $query = "SELECT * FROM found_items 
                   WHERE is_approved = 1 AND (item_name LIKE :keyword OR category LIKE :keyword)
                   ORDER BY date_found DESC";
-        $stmt = $this->db->prepare($query);
+
+        // ✅ FIXED: using $this->conn for prepare
+        $stmt = $this->conn->prepare($query);
         $stmt->execute([':keyword' => '%' . $keyword . '%']);
+
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-
-
-
-    // method to get only approved items 
+    // Method to get only approved items
     public function getAllItems()
     {
-        $stmt = $this->db->query("SELECT * FROM found_items WHERE status = 'approved' ORDER BY created_at DESC");
+        // ✅ FIXED: using $this->conn->query directly
+        $stmt = $this->conn->query("SELECT * FROM found_items WHERE status = 'approved' ORDER BY created_at DESC");
+
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // Search only approved items
     public function searchItems($searchTerm)
     {
-        $stmt = $this->db->prepare("SELECT * FROM found_items  WHERE status = 'approved'  AND (item_name LIKE :searchTerm OR category LIKE :searchTerm)");
+        // ✅ FIXED: using $this->conn for prepare
+        $stmt = $this->conn->prepare("SELECT * FROM found_items WHERE status = 'approved' AND (item_name LIKE :searchTerm OR category LIKE :searchTerm)");
         $stmt->execute([':searchTerm' => '%' . $searchTerm . '%']);
+
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

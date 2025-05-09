@@ -1,7 +1,11 @@
 <?php
 session_start();
 require_once(__DIR__ . '/../config/db.php');
-require_once(__DIR__ . '/../model/user.php');
+require_once(__DIR__ . '/../classes/user.php');
+
+// Initialize the database connection
+$database = new Database();
+$db = $database->connect();
 
 class RegisterController
 {

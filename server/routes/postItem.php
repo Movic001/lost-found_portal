@@ -5,6 +5,10 @@ require_once(__DIR__ . '/../config/db.php');
 // Include the PostItemController
 require_once(__DIR__ . '/../controller/postItemController.php');
 
+// Initialize the database connection
+$database = new Database();
+$db = $database->connect();
+
 // Check if the form was submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['postItem'])) {
     // Collect and sanitize form inputs

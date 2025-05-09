@@ -13,7 +13,6 @@ class ItemController
 
     public function approveItem($id)
     {
-        // Assuming you have a method in your Item model to update the status of an item
         $this->itemModel->updateStatus($id, 'approved');
         header("Location: ../../frontend/pages/adminDashboard/pages/adminDashboard.php");
         exit;

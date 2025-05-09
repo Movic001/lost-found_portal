@@ -1,12 +1,23 @@
 <?php
 session_start();
 require_once '../../../../server/config/db.php'; // Include your database connection file
-require_once '../../../../server/model/item_class.php'; // Include your Item model class
+require_once '../../../../server/classes/item_class.php'; // Include your Item model class
 
-$itemModel = new Item($db);
-$items = $itemModel->getAllItems();
 
+$db = new Database();
+$conn = $db->connect();     // ✅ Get the PDO object
+$item = new Item($conn);    // ✅ Pass the PDO connection to the Item class
+$items = $item->getAllItems(); // ✅ Fetch all item
+
+// Check if the user is logged in and is an admin
+if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'admin') {
+  header('Location: ../../login.html'); // Redirect to login page if not logged in or not an admin
+  exit();
+}
+//check if user is login using the url to nevigate to the page
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -162,11 +173,11 @@ $items = $itemModel->getAllItems();
 
               <td>
                 <?php if ($item['status'] === 'pending'): ?>
-                  <form action="/server/routes/item_routes.php" method="POST" style="display:inline;">
+                  <form action="../../../../server/routes/item_routes.php" method="POST" style="display:inline;">
                     <input type="hidden" name="item_id" value="<?= htmlspecialchars($item['id']) ?>" />
                     <button type="submit" name="approve" class="action-btn approve-btn" title="Approve">✓</button>
                   </form>
-                  <form action="/server/routes/item_routes.php" method="POST" style="display:inline;">
+                  <form action="../../../../server/routes/item_routes.php" method="POST" style="display:inline;">
                     <input type="hidden" name="item_id" value="<?= htmlspecialchars($item['id']) ?>" />
                     <button type="submit" name="reject" class="action-btn reject-btn" title="Reject">✕</button>
                   </form>
@@ -275,4 +286,5 @@ $items = $itemModel->getAllItems();
 
   <script src="../script/adminDashboard.js"></script>
 </body>
-< /html>
+
+</html>

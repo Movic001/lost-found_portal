@@ -3,7 +3,10 @@
 require_once '../config/db.php';
 require_once '../controller/itemController.php';
 
+$database = new Database();
+$db = $database->connect();
 $controller = new ItemController($db);
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['approve'])) {

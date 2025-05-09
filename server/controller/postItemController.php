@@ -1,6 +1,6 @@
 <?php
 // Include the model
-require_once(__DIR__ . '/../model/postItem_class.php');
+require_once(__DIR__ . '/../classes/postItem_class.php');
 
 class PostItemController
 {

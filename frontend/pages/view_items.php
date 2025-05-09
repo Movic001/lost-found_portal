@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once(__DIR__ . '/../../server/config/db.php');
-require_once(__DIR__ . '/../../server/model/postItem_class.php');
+require_once(__DIR__ . '/../../server/classes/postItem_class.php');
 
 // Instantiate FoundItem object
 $foundItem = new FoundItem($db);
@@ -33,8 +33,8 @@ if (!empty($searchQuery) && empty($items)) {
 
 <body>
   <div class="navbar">
-    <a href="./dashboard.html">
-      <h1>Found Items</h1>
+    <a href="./dashboard.php">
+      <h1>Dashboard</h1>
     </a>
     <div class="search-bar">
       <form method="GET" action="">
@@ -58,7 +58,6 @@ if (!empty($searchQuery) && empty($items)) {
         <div class="item-info">
           <h3 class="item-name"><?php echo htmlspecialchars($item['item_name']); ?></h3>
           <p class="item-category"><?php echo htmlspecialchars($item['category']); ?></p>
-          <p class="item-details">Location: <?php echo htmlspecialchars($item['location_found']); ?></p>
           <p class="item-date">Found: <?php echo htmlspecialchars($item['date_found']); ?></p>
 
           <div class="user-info">

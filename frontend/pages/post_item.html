@@ -13,14 +13,14 @@
       <h1>Post Found Items</h1>
 
       <span class="toggle_back"
-        ><a href="./dashboard.html"> back to dashboard </a></span
+        ><a href="./dashboard.php"> back to dashboard </a></span
       >
     </div>
 
     <div class="form-container">
       <h2>Post Found Item</h2>
       <form
-        action="/server/routes/postItem.php"
+        action="../../server/routes/postItem.php"
         method="POST"
         enctype="multipart/form-data"
       >
@@ -60,8 +60,14 @@
           placeholder="Unique Question"
           required
         />
+        <input
+          type="text"
+          name="security_answer"
+          placeholder="Answer to the security question"
+          required
+        />
 
-        <button type="submit" name="postItem">Submit Found Item</button>
+        <input type="submit" name="postItem" value="Submit Found Item" />
       </form>
     </div>
   </body>
