@@ -141,4 +141,18 @@ class FoundItem
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+
+    // Method to get a specific item by ID
+    // ✅ FIXED: using $this->conn for prepare
+    // ✅ FIXED: added is_approved check to ensure only approved items are fetched
+    public function getItemById($item_id)
+    {
+        $sql = "SELECT * FROM found_items WHERE id = :item_id AND is_approved = 1";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':item_id', $item_id);
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC); // returns item data or false
+    }
 }

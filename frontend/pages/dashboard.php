@@ -157,9 +157,9 @@ $items = $foundItem->getAllItems();
                   <input type="hidden" name="item_id" value="<?php echo $item['id']; ?>">
 
                   <a href="./claim.php?id=<?php echo $item['id']; ?>">
-                    <button class="btn btn-view">View</button>
+                    <button class="btn btn-claim" onclick="return confirm('Are you the owner?')">Claim</button>
                   </a>
-                  <button class="btn btn-claim" onclick="return confirm('Are you the owner?')">Claim</button>
+
                 </form>
               <?php endif; ?>
             </div>

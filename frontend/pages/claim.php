@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+require_once '../../server/config/db.php';          // Your DB connection
+require_once '../../server/classes/postItem_class.php';  // The item class
+
+// Initialize the database connection
+$database = new Database();
+$db = $database->connect();        // Connect to DB
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,6 +25,7 @@
         <input type="text" name="location_lost" required placeholder="Where did you lose it?">
 
         <p>Security Question: <?= htmlspecialchars($item['security_question']) ?></p>
+
         <input type="text" name="security_answer" required placeholder="Answer to security question">
 
         <button type="submit">Submit Claim</button>
