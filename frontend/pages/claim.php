@@ -1,12 +1,21 @@
 <?php
-session_start();
+//check if the session is started, if not, start it
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
 require_once '../../server/config/db.php';          // Your DB connection
 require_once '../../server/classes/postItem_class.php';  // The item class
 
 // Initialize the database connection
 $database = new Database();
-$db = $database->connect();        // Connect to DB
+$db = $database->connect();
+
+
+if (!isset($item)) {
+    die("Unauthorized access. This page must be accessed through the claim route.");
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -19,16 +28,16 @@ $db = $database->connect();        // Connect to DB
 </head>
 
 <body>
-    <form action="/server/routes/claimRoute.php" method="POST">
+    <form action="../../server/routes/claimRoute.php" method="POST">
         <input type="hidden" name="item_id" value="<?= $item['id'] ?>">
         <textarea name="description" required placeholder="Describe the lost item in detail"></textarea>
         <input type="text" name="location_lost" required placeholder="Where did you lose it?">
 
-        <p>Security Question: <?= htmlspecialchars($item['security_question']) ?></p>
+        <p>Security Question: <?= htmlspecialchars($item['unique_question']) ?></p>
 
         <input type="text" name="security_answer" required placeholder="Answer to security question">
 
-        <button type="submit">Submit Claim</button>
+        <button type="submit" name="clain_request">Submit Claim</button>
     </form>
 
 
