@@ -57,6 +57,10 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'admin') {
           <i>👥</i>
           User Management
         </a>
+        <a href="./notification.php" class="nav-item">
+          <i>👥</i>
+          Notifications
+        </a>
         <a href="#" class="nav-item">
           <i>📦</i>
           Items

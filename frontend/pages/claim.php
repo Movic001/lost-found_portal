@@ -29,16 +29,23 @@ if (!isset($item)) {
 
 <body>
     <form action="../../server/routes/claimRoute.php" method="POST">
-        <input type="hidden" name="item_id" value="<?= $item['id'] ?>">
-        <textarea name="description" required placeholder="Describe the lost item in detail"></textarea>
-        <input type="text" name="location_lost" required placeholder="Where did you lose it?">
+        <input type="hidden" name="item_id" value="<?= htmlspecialchars($item['id']) ?>">
 
-        <p>Security Question: <?= htmlspecialchars($item['unique_question']) ?></p>
+        <label for="description">Describe the lost item:</label><br>
+        <textarea id="description" name="description" required placeholder="Describe the lost item in detail"></textarea><br>
 
-        <input type="text" name="security_answer" required placeholder="Answer to security question">
+        <label for="location_lost">Where did you lose it?</label><br>
+        <input type="text" id="location_lost" name="location_lost" required placeholder="Location lost"><br>
 
-        <button type="submit" name="clain_request">Submit Claim</button>
+        <p><strong>Security Question:</strong> <?= htmlspecialchars($item['unique_question']) ?></p>
+
+        <label for="security_answer">Answer:</label><br>
+        <input type="text" id="security_answer" name="security_answer" required placeholder="Answer to security question"><br>
+
+        <button type="submit" name="claim_request">Submit Claim</button>
+
     </form>
+
 
 
 </body>

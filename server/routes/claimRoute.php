@@ -1,27 +1,51 @@
 <?php
-//if section is not started, start it
-// if (session_status() == PHP_SESSION_NONE) {
-//     session_start();
-// }
+session_start();
 
-require_once '../config/db.php';          // Your DB connection
-require_once '../classes/postItem_class.php';  // The item class
-
+require_once('../config/db.php');          // Your DB connection
+require_once('../controller/ClaimController.php');
+require_once('../classes/postItem_class.php'); // For fetching item
 
 $db = (new Database())->connect();
-$itemModel = new FoundItem($db);
+$claimController = new ClaimController($db);
 
-// Make sure the item_id is provided via GET
-if (!isset($_GET['item_id']) || empty($_GET['item_id'])) {
-    die("Missing or invalid item ID.");
+// === 1. Show claim form if GET ===
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['item_id'])) {
+    $itemModel = new FoundItem($db);
+    $item = $itemModel->getItemById($_GET['item_id']);
+
+    if (!$item) {
+        die("Item not found.");
+    }
+
+    // Load the form with the $item data
+    include('../../frontend/pages/claim.php');
+    exit;
 }
 
-$item_id = $_GET['item_id'];
-$item = $itemModel->getItemById($item_id);
+// === 2. Handle form submission ===
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['claim_request'])) {
+    try {
+        if (!isset($_SESSION['user_id'])) {
+            throw new Exception("You must be logged in to submit a claim.");
+        }
 
-if (!$item) {
-    die("Item not found.");
+        $data = [
+            'item_id' => $_POST['item_id'],
+            'user_id' => $_SESSION['user_id'],
+            'description' => $_POST['description'],
+            'location_lost' => $_POST['location_lost'],
+            'security_answer' => $_POST['security_answer']
+        ];
+
+        if ($claimController->submitClaim($data)) {
+            header("Location: ../../frontend/pages/notification/claimNotification.php?status=pending");
+            exit;
+        } else {
+            throw new Exception("Failed to submit claim.");
+        }
+    } catch (Exception $e) {
+        echo "Error: " . $e->getMessage();
+    }
+} else {
+    echo "Invalid request method.";
 }
-
-
-include '../../frontend/pages/claim.php';    // Show the form and send $item to it
