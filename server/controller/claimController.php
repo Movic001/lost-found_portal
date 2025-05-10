@@ -38,11 +38,12 @@ class ClaimController
 
     public function getPendingClaimsForPoster($posterId)
     {
-        $query = "SELECT claims.*, users.fullName AS claimant_name, found_items.name AS item_name
-                  FROM claims
-                  JOIN users ON claims.user_id = users.id
-                  JOIN found_items ON claims.item_id = found_items.id
-                  WHERE found_items.user_id = :poster_id AND claims.status = 'pending'";
+        $query = "SELECT claims.*, users.fullName AS claimant_name, found_items.item_name AS item_name
+          FROM claims
+          JOIN users ON claims.user_id = users.id
+          JOIN found_items ON claims.item_id = found_items.id
+          WHERE found_items.user_id = :poster_id AND claims.status = 'pending'";
+
 
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':poster_id', $posterId);
@@ -52,11 +53,12 @@ class ClaimController
 
     public function getAllClaimsForAdmin()
     {
-        $query = " SELECT claims.*, users.fullName AS claimant_name, found_items.name AS item_name
-                  FROM claims
-                  JOIN users ON claims.user_id = users.id
-                  JOIN found_items ON claims.item_id = found_items.id
-                  ORDER BY claims.created_at DESC";
+        $query = "SELECT claims.*, users.fullName AS claimant_name, found_items.item_name AS item_name
+          FROM claims
+          JOIN users ON claims.user_id = users.id
+          JOIN found_items ON claims.item_id = found_items.id
+          ORDER BY claims.created_at DESC";
+
 
         $stmt = $this->db->query($query);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

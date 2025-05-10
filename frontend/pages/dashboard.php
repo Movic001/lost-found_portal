@@ -68,8 +68,8 @@ $items = $foundItem->getAllItems();
       <a href="./view_items.php" class="nav-item">
         <i class="fas fa-search"></i> Browse Items
       </a>
-      <a href="#" class="nav-item"> <i class="fas fa-list"></i> My Posts </a>
-      <a href="#" class="nav-item">
+      <a href="./userPost.php" class="nav-item"> <i class="fas fa-list"></i> My Posts </a>
+      <a href="./userNotification.php" class="nav-item">
         <i class="fas fa-bell"></i> Notifications
       </a>
       <a href="#" class="nav-item"> <i class="fas fa-cog"></i> Settings </a>
@@ -102,9 +102,11 @@ $items = $foundItem->getAllItems();
             <i class="fas fa-search"></i> View Found Items
           </button>
         </a>
-        <button class="action-btn">
-          <i class="fas fa-list"></i> View My Posts
-        </button>
+        <a href="./userPost.php">
+          <button class="action-btn">
+            <i class="fas fa-list"></i> View My Posts
+          </button>
+        </a>
       </div>
     </div>
 

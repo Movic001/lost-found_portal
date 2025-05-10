@@ -155,4 +155,14 @@ class FoundItem
 
         return $stmt->fetch(PDO::FETCH_ASSOC); // returns item data or false
     }
+
+    // Method to update item status
+    public function getItemsByUserId($userId)
+    {
+        $query = "SELECT * FROM found_items WHERE user_id = :user_id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':user_id', $userId);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
