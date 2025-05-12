@@ -19,11 +19,54 @@
 body {
   font-family: "Arial", sans-serif;
   line-height: 1.6;
-  background-color: var(--background-color);
+  background-color: #ccd1d4;
   color: var(--text-color);
   padding: 20px;
-  max-width: 800px;
   margin: 0 auto;
+}
+
+/* Navbar styling */
+.navbar {
+  background-color: rgb(255, 255, 255);
+  box-shadow: var(--box-shadow);
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar-logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.navbar-menu {
+  display: flex;
+  gap: 20px;
+}
+
+.navbar-link {
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.navbar-link:hover {
+  color: var(--primary-color);
+}
+
+.navbar-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
 }
 
 /* Heading Styles */
@@ -51,6 +94,8 @@ h2::after {
 ul {
   list-style-type: none;
   padding: 0;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 li {
