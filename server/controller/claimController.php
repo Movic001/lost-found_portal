@@ -38,7 +38,10 @@ class ClaimController
 
     public function getPendingClaimsForPoster($posterId)
     {
-        $query = "SELECT claims.*, users.fullName AS claimant_name, found_items.item_name AS item_name
+        $query = "SELECT claims.*, users.fullName AS 
+        claimant_name, 
+        found_items.item_name,
+        found_items.unique_question
           FROM claims
           JOIN users ON claims.user_id = users.id
           JOIN found_items ON claims.item_id = found_items.id
@@ -51,14 +54,28 @@ class ClaimController
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    // public function getAllClaimsForAdmin()
+    // {
+    //     $query = "SELECT claims.*, users.fullName AS claimant_name, found_items.item_name AS item_name
+    //       FROM claims
+    //       JOIN users ON claims.user_id = users.id
+    //       JOIN found_items ON claims.item_id = found_items.id
+    //       ORDER BY claims.created_at DESC";
+
+
+    //     $stmt = $this->db->query($query);
+    //     return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // }
     public function getAllClaimsForAdmin()
     {
-        $query = "SELECT claims.*, users.fullName AS claimant_name, found_items.item_name AS item_name
-          FROM claims
-          JOIN users ON claims.user_id = users.id
-          JOIN found_items ON claims.item_id = found_items.id
-          ORDER BY claims.created_at DESC";
-
+        $query = "SELECT claims.*, users.fullName AS claimant_name, 
+                     found_items.item_name,
+                     found_items.image_path,
+                     found_items.unique_question
+              FROM claims
+              JOIN users ON claims.user_id = users.id
+              JOIN found_items ON claims.item_id = found_items.id
+              ORDER BY claims.created_at DESC";
 
         $stmt = $this->db->query($query);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
