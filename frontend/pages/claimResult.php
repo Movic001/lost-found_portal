@@ -48,6 +48,18 @@ try {
 </head>
 
 <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="#" class="navbar-logo">LostFound Users</a>
+        <button class="navbar-toggle" id="navbarToggle">☰</button>
+        <div class="navbar-menu" id="navbarMenu">
+            <a href="./dashboard.php" class="navbar-link">Dashboard</a>
+            <a href="./userNotification.php" class="navbar-link active">Claims</a>
+            <!--a href="#" class="navbar-link">Items</a>
+            <a href="#" class="navbar-link">Settings</a>
+            <a href="#" class="navbar-link">Logout</a-->
+        </div>
+    </nav>
     <h2>My Claim Notifications</h2>
 
     <?php if (empty($claims)): ?>

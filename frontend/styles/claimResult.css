@@ -1,0 +1,146 @@
+/* Reset and Base Styles */
+:root {
+  --primary-color: #3498db;
+  --secondary-color: #2ecc71;
+  --background-color: #f4f6f7;
+  --text-color: #2c3e50;
+  --border-color: #bdc3c7;
+  --pending-color: #f39c12;
+  --approved-color: #2ecc71;
+  --rejected-color: #e74c3c;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Arial", sans-serif;
+  line-height: 1.6;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Heading Styles */
+h2 {
+  text-align: center;
+  color: var(--primary-color);
+  margin-bottom: 30px;
+  font-size: 1.8rem;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+h2::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background-color: var(--primary-color);
+}
+
+/* List Styles */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  background-color: white;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+li:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Status Indicators */
+li strong {
+  color: var(--text-color);
+  display: inline-block;
+  margin-right: 10px;
+}
+
+li em {
+  font-style: italic;
+  color: var(--pending-color);
+}
+
+/* Status-specific Styling */
+li[data-status="pending"] {
+  border-left: 4px solid var(--pending-color);
+}
+
+li[data-status="approved"] {
+  border-left: 4px solid var(--approved-color);
+}
+
+li[data-status="rejected"] {
+  border-left: 4px solid var(--rejected-color);
+}
+
+/* Responsive Typography */
+@media screen and (max-width: 600px) {
+  body {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  li {
+    padding: 15px;
+  }
+}
+
+/* Empty State Styling */
+.empty-state {
+  text-align: center;
+  color: var(--border-color);
+  padding: 50px 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.empty-state i {
+  font-size: 4rem;
+  color: var(--border-color);
+  margin-bottom: 20px;
+}
+
+/* Accessibility Improvements */
+a:focus,
+button:focus {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Print Styles */
+@media print {
+  body {
+    background-color: white;
+  }
+
+  li {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    border: 1px solid black;
+  }
+}
