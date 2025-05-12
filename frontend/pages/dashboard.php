@@ -68,11 +68,11 @@ $items = $foundItem->getAllItems();
       <a href="./view_items.php" class="nav-item">
         <i class="fas fa-search"></i> Browse Items
       </a>
-      <a href="./notification/claimNotification.php" class="nav-item">
+      <a href="./claimResult.php" class="nav-item">
         <i class="fas fa-bell"></i>Claim Notifications
       </a>
-      <a href="./userNotification.php" class="nav-item">
-        <i class="fas fa-bell"></i> Notifications
+      <a href="./manageClaim.php" class="nav-item">
+        <i class="fas fa-bell"></i> Manage Claims
       </a>
       <a href="#" class="nav-item"> <i class="fas fa-cog"></i> Settings </a>
     </div>

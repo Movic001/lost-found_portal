@@ -3,7 +3,6 @@ session_start();
 
 require_once('../config/db.php');
 require_once('../controller/ClaimController.php');
-
 // Only allow access if user is admin or item poster
 if (!isset($_SESSION['user_id'])) {
     die("Unauthorized access.");
@@ -23,7 +22,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['claim_id']) && isset(
     $status = $action === 'approve' ? 'approved' : 'rejected';
 
     if ($claimController->updateClaimStatus($claimId, $status)) {
-        header("Location: ../../frontend/pages/claimRequests.php?success=1");
+        header("Location: ../../frontend\pages\adminDashboard\pages\claimNotification.php?status=$status&claim_id=$claimId");
+
+        // header("Location: ../../frontend/pages/adminDashboard/pages/notification.php");
+        // Optionally, you can set a session message to display a success message
         exit;
     } else {
         echo "Failed to update claim status.";

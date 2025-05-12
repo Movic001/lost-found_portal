@@ -85,16 +85,16 @@ $claims = $claimController->getAllClaimsForAdmin(); // Or getPendingClaimsForPos
                         </div>
                     </div>
 
-                    <form action="../../server/routes/claimApprovalRoute.php" method="POST" class="claim-form">
+                    <form action="../../../../server/routes/approveRejectRoute.php" method="POST" class="claim-form">
                         <input type="hidden" name="claim_id" value="<?= $claim['id'] ?>">
                         <div class="card-actions">
-                            <button type="submit" name="action" value="approved" class="btn btn-approve">
+                            <button type="submit" name="action" value="approve" class="btn btn-approve">
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M20 6L9 17l-5-5"></path>
                                 </svg>
                                 Approve
                             </button>
-                            <button type="submit" name="action" value="rejected" class="btn btn-reject">
+                            <button type="submit" name="action" value="reject" class="btn btn-reject">
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M18 6L6 18M6 6l12 12"></path>
                                 </svg>
