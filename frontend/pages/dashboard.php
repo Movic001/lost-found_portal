@@ -68,7 +68,9 @@ $items = $foundItem->getAllItems();
       <a href="./view_items.php" class="nav-item">
         <i class="fas fa-search"></i> Browse Items
       </a>
-      <a href="./userPost.php" class="nav-item"> <i class="fas fa-list"></i> My Posts </a>
+      <a href="./notification/claimNotification.php" class="nav-item">
+        <i class="fas fa-bell"></i>Claim Notifications
+      </a>
       <a href="./userNotification.php" class="nav-item">
         <i class="fas fa-bell"></i> Notifications
       </a>
@@ -149,7 +151,7 @@ $items = $foundItem->getAllItems();
             <div class="item-actions">
               <!-- check if the user is the owner of the post-->
               <?php if ($item['user_id'] === $_SESSION['user_id']): ?>
-                <a href="edit_item.php?id=<?php echo $item['id']; ?>"><button class="btn btn-edit">Edit</button></a>
+                <a href="./editItem.php?id=<?php echo $item['id']; ?>"><button class="btn btn-edit">Edit</button></a>
                 <form method="POST" action="../../server/routes/deleteRoute.php" style="display:inline;">
                   <input type="hidden" name="item_id" value="<?php echo $item['id']; ?>">
                   <button class="btn btn-delete" onclick="return confirm('Delete this item?')">Delete</button>

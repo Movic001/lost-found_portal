@@ -61,7 +61,7 @@ if (!empty($searchQuery) && empty($items)) {
           <p class="item-date">Found: <?php echo htmlspecialchars($item['date_found']); ?></p>
 
           <div class="user-info">
-            <img src="../assets/image/profile_img/default_user.png" alt="User" class="user-avatar" />
+            <img src="../assets/image/profile_img/profile 4.webp" alt="User" class="user-avatar" />
             <span>Posted by <?php echo htmlspecialchars($item['person_name']); ?></span>
           </div>
 

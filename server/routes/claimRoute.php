@@ -38,6 +38,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['claim_request'])) {
         ];
 
         if ($claimController->submitClaim($data)) {
+            // run an alert with a success message and redirect to notification page
+            echo "<script>alert('Claim submitted successfully!');</script>";
             header("Location: ../../frontend/pages/notification/claimNotification.php?status=pending");
             exit;
         } else {

@@ -57,7 +57,7 @@ if (!$item || !$editItemController->checkItemOwner($_GET['id'], $_SESSION['user_
 
       <!-- Existing Image -->
       <?php if (!empty($item['image_path'])): ?>
-        <img src="../../<?= $item['image_path'] ?>" alt="Current Image" style="width: 100px; height: auto; margin-bottom: 10px" />
+        <img src="../../frontend/uploads/<?= $item['image_path'] ?>" alt="Current Image" style="width: 100px; height: auto; margin-bottom: 10px" />
       <?php endif; ?>
       <input type="hidden" name="existing_image_path" value="<?= htmlspecialchars($item['image_path']) ?>" />
       <input type="file" name="image_path" accept="image/*" />

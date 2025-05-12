@@ -23,7 +23,7 @@ $status = $_GET['status'] ?? 'unknown';
     <?php else: ?>
         <p>Status: <?= htmlspecialchars($status) ?></p>
     <?php endif; ?>
-    <a href="../../view/view_items.php">Back to items</a>
+    <a href="../../pages/notification/claimNotification.php">Back to items</a>
 </body>
 
 </html>
