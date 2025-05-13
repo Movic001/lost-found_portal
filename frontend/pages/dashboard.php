@@ -1,5 +1,8 @@
 <?php
-session_start();
+//if session is not started, start it
+if (session_status() == PHP_SESSION_NONE) {
+  session_start(); // Only start the session if it's not already active
+}
 require_once('../../server/config/db.php');
 require_once(__DIR__ . '/../../server/classes/postItem_class.php');
 require_once('../../server/includes/auth.php');
@@ -37,16 +40,16 @@ $items = $foundItem->getAllItems();
       <div class="dropdown-content">
         <p>
           <strong>Name:</strong>
-          <?php echo htmlspecialchars($user['userName']); ?>
+          <?php echo htmlspecialchars($_SESSION['user_name']); ?>
         </p>
         <p>
           <strong>Mobile:</strong>
-          <?php echo htmlspecialchars($user['mobile']); ?>
+          <?php echo htmlspecialchars($_SESSION['user_mobile']); ?>
         </p>
 
         <p>
           <strong>Email:</strong>
-          <?php echo htmlspecialchars($user['email']); ?>
+          <?php echo htmlspecialchars($_SESSION['user_email']); ?>
         </p>
 
       </div>
@@ -92,7 +95,7 @@ $items = $foundItem->getAllItems();
   <!-- Main Content -->
   <div class="container" id="container">
     <div class="welcome-section">
-      <h1 class="welcome-message">Welcome, <span> <?php echo htmlspecialchars($user['userName']); ?></span> </h1>
+      <h1 class="welcome-message">Welcome, <span> <?php echo htmlspecialchars($_SESSION['user_name']); ?></span> </h1>
       <div class="quick-actions">
         <a href="./post_item.html">
           <button class="action-btn">

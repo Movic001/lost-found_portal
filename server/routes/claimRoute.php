@@ -1,5 +1,8 @@
 <?php
-session_start();
+//if session is not started, start it
+if (session_status() == PHP_SESSION_NONE) {
+    session_start(); // Only start the session if it's not already active
+}
 
 require_once('../config/db.php');          // Your DB connection
 require_once('../controller/ClaimController.php');

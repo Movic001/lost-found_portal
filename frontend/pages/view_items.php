@@ -1,5 +1,8 @@
 <?php
-session_start();
+//if session is not started, start it
+if (session_status() == PHP_SESSION_NONE) {
+  session_start(); // Only start the session if it's not already active
+}
 require_once(__DIR__ . '/../../server/config/db.php');
 require_once(__DIR__ . '/../../server/classes/postItem_class.php');
 

@@ -1,6 +1,7 @@
 <?php
 // Include the model
 require_once(__DIR__ . '/../classes/postItem_class.php');
+include('../../server/includes/auth.php');
 
 class PostItemController
 {
