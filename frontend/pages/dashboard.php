@@ -3,6 +3,7 @@
 if (session_status() == PHP_SESSION_NONE) {
   session_start(); // Only start the session if it's not already active
 }
+include('../../server/includes/auth.php');
 require_once('../../server/config/db.php');
 require_once(__DIR__ . '/../../server/classes/postItem_class.php');
 require_once('../../server/includes/auth.php');
@@ -136,7 +137,6 @@ $items = $foundItem->getAllItems();
 
     <h2 class="section-title">Recent Found Items</h2>
     <div class="items-grid">
-
       <!--Loop Through Items From Database:-->
       <?php foreach ($items as $item): ?>
         <div class="item-card">

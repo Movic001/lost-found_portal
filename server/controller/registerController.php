@@ -20,8 +20,7 @@ class RegisterController
                 'email'    => trim($_POST['email']),
                 'address'  => trim($_POST['address']),
                 'city'     => trim($_POST['city']),
-                'password' => $_POST['password'],
-                'role'     => $_POST['role']
+                'password' => $_POST['password']
             ];
 
             // Create a User object

@@ -7,9 +7,11 @@ if (session_status() == PHP_SESSION_NONE) {
 require_once('../config/db.php');
 require_once('../controller/ClaimController.php');
 // Only allow access if user is admin or item poster
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'admin') {
     die("Unauthorized access.");
 }
+// Check if the user is logged in and has the correct role
+//if user is not logged in, redirect to login page
 
 $db = (new Database())->connect();
 $claimController = new ClaimController($db);

@@ -79,14 +79,33 @@ class ClaimController
         return $stmt->execute();
     }
 
+    // public function getClaimById($claimId)
+    // {
+    //     $query = "SELECT * FROM claims WHERE id = :id";
+    //     $stmt = $this->db->prepare($query);
+    //     $stmt->bindParam(':id', $claimId);
+    //     $stmt->execute();
+    //     return $stmt->fetch(PDO::FETCH_ASSOC);
+    // }
+
     public function getClaimById($claimId)
     {
         $query = "SELECT * FROM claims WHERE id = :id";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':id', $claimId);
         $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($result) {
+            return $result;
+        } else {
+            throw new Exception("Claim not found.");
+        }
     }
+
+
+
+
 
     public function deleteClaim($claimId)
     {
