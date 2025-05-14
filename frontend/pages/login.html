@@ -16,6 +16,11 @@
         <div class="form-section user-form active">
           <h2>User Login</h2>
           <form action="../../server/routes/loginRoute.php" method="POST">
+            <input
+              type="hidden"
+              name="csrf_token"
+              value="<?php echo generateCsrfToken(); ?>"
+            />
             <div class="input-group">
               <input
                 type="email"

@@ -1,10 +1,10 @@
 <?php
-// Start session if not already started
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-if (isset($_POST['logOut'])) {
+// Verify CSRF token if implemented
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logOut'])) {
     // Unset all session variables
     $_SESSION = [];
 
@@ -24,10 +24,10 @@ if (isset($_POST['logOut'])) {
             $params["httponly"]
         );
     }
-
-    echo "<script>alert('You have logged out successfully!'); window.location.href='../../frontend/pages/login.html';</script>";
+    echo "<script>alert('Logged out successfully'); window.location.href='../../frontend/pages/login.html';</script>";
     exit;
 } else {
-    echo "<script>alert('Invalid request.'); window.location.href='../../frontend/pages/login.html';</script>";
+    header("HTTP/1.1 400 Bad Request");
+    echo json_encode(['status' => 'error', 'message' => 'Invalid request']);
     exit;
 }

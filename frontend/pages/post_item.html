@@ -24,6 +24,11 @@
         method="POST"
         enctype="multipart/form-data"
       >
+        <input
+          type="hidden"
+          name="csrf_token"
+          value="<?php echo generateCsrfToken(); ?>"
+        />
         <input type="text" name="item_name" placeholder="Item Name" required />
         <input type="text" name="category" placeholder="Category" required />
         <textarea

@@ -43,6 +43,7 @@ if (!$item || !$editItemController->checkItemOwner($_GET['id'], $_SESSION['user_
   <div class="form-container">
     <h2>Edit Item Details</h2>
     <form method="POST" action="../../server/routes/edit_itemRoute.php" enctype="multipart/form-data">
+      <!--input type="hidden" name="csrf_token" value="<!?php echo generateCsrfToken(); ?>"-->
       <input type="hidden" name="id" value="<?= htmlspecialchars($item['id']) ?>" />
 
       <input type="text" name="item_name" placeholder="Item Name" value="<?= htmlspecialchars($item['item_name']) ?>" required />

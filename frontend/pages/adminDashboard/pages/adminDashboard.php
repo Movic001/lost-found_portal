@@ -1,5 +1,8 @@
 <?php
-session_start();
+include('../../../../server/includes/csrf_helper.php'); // Include CSRF helper functions
+if (session_status() == PHP_SESSION_NONE) {
+  session_start();
+}
 require_once '../../../../server/config/db.php'; // Include your database connection file
 require_once '../../../../server/classes/item_class.php'; // Include your Item model class
 

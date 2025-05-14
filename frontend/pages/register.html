@@ -19,6 +19,7 @@
     </div>
     <form action="../../server/routes/registerRoute.php" method="POST">
       <h2 style="text-align: center">User Registration</h2>
+       <input type="hidden" name="csrf_token" value="<?php echo generateCsrfToken(); ?>">
 
       <input type="text" name="fullName" placeholder="Full Name" required />
       <input type="text" name="userName" placeholder="Username" required />

@@ -1,40 +1,99 @@
 <?php
-//if session is not started, start it
+// Enable error reporting for debugging
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+// Start session
 if (session_status() == PHP_SESSION_NONE) {
-    session_start(); // Only start the session if it's not already active
+    session_start();
 }
 
 require_once('../config/db.php');
+require_once('../includes/csrf_helper.php');
+require_once('../classes/user.php');
 require_once('../controller/ClaimController.php');
-// Only allow access if user is admin or item poster
-if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'admin') {
-    die("Unauthorized access.");
-}
-// Check if the user is logged in and has the correct role
-//if user is not logged in, redirect to login page
 
+// Debug: Log received POST data
+error_log("Received POST data: " . print_r($_POST, true));
+
+// Check authorization
 $db = (new Database())->connect();
-$claimController = new ClaimController($db);
+$user = new User($db);
+if (!isset($_SESSION['user_id']) || !$user->isAdmin($_SESSION['user_id'])) {
+    die("<script>
+        alert('Unauthorized access');
+        window.location.href = '../../frontend/pages/login.html';
+    </script>");
+}
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['claim_id']) && isset($_POST['action'])) {
-    $claimId = $_POST['claim_id'];
-    $action = $_POST['action'];
+// Validate request
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    die("<script>
+        alert('Invalid request method');
+        window.location.href = '../../frontend/pages/adminDashboard/pages/adminDashboard.php';
+    </script>");
+}
 
-    if (!in_array($action, ['approve', 'reject'])) {
-        die("Invalid action.");
+// Check required parameters
+$required = ['claim_id', 'action', 'csrf_token'];
+foreach ($required as $field) {
+    if (!isset($_POST[$field])) {
+        error_log("Missing field: $field");
+        die("<script>
+            alert('Missing required parameters');
+            window.location.href = '../../frontend/pages/adminDashboard/pages/adminDashboard.php';
+        </script>");
+    }
+}
+
+try {
+    // Sanitize inputs
+    $claimId = (int)$_POST['claim_id'];
+    $action = $_POST['action'] === 'approve' ? 'approved' : 'rejected';
+    $csrfToken = $_POST['csrf_token'];
+
+    // Verify CSRF token
+    if (!verifyCsrfToken($csrfToken)) {
+        throw new Exception("Security token expired. Please refresh the page.");
     }
 
-    $status = $action === 'approve' ? 'approved' : 'rejected';
-
-    if ($claimController->updateClaimStatus($claimId, $status)) {
-        header("Location: ../../frontend\pages\adminDashboard\pages\claimNotification.php?status=$status&claim_id=$claimId");
-
-        // header("Location: ../../frontend/pages/adminDashboard/pages/notification.php");
-        // Optionally, you can set a session message to display a success message
-        exit;
-    } else {
-        echo "Failed to update claim status.";
+    // Process claim
+    $claimController = new ClaimController($db);
+    if (!$claimController->updateClaimStatus($claimId, $action)) {
+        throw new Exception("Failed to update claim status");
     }
-} else {
-    echo "Invalid request.";
+
+    // Handle role upgrade if approving
+    if ($action === 'approved') {
+        $claim = $claimController->getClaimById($claimId);
+        $userId = $claim['user_id'];
+
+        if (!$user->updateUserRole($userId, 'admin')) {
+            throw new Exception("Failed to update user role");
+        }
+
+        // Special handling if admin approved their own claim
+        if ($_SESSION['user_id'] == $userId) {
+            session_unset();
+            session_destroy();
+            die("<script>
+                alert('Your account has been upgraded to admin. Please login again.');
+                window.location.href = '../../frontend/pages/login.html';
+            </script>");
+        }
+    }
+
+    // Success response
+    echo "<script>
+        alert('Claim {$action} successfully');
+        window.location.href = '../../frontend/pages/adminDashboard/pages/claimNotification.php?status={$action}&claim_id={$claimId}';
+    </script>";
+    exit;
+} catch (Exception $e) {
+    error_log("Error in approveRejectRoutes: " . $e->getMessage());
+    echo "<script>
+        alert('Error: " . addslashes($e->getMessage()) . "');
+        window.location.href = '../../frontend/pages/adminDashboard/pages/adminDashboard.php';
+    </script>";
+    exit;
 }

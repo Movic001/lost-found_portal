@@ -43,6 +43,7 @@ $claims = $isAdmin
                 <td><?= htmlspecialchars($claim['status']) ?></td>
                 <td>
                     <form action="../../server/routes/approveRejectRoute.php" method="POST">
+                        <input type="hidden" name="csrf_token" value="<?php echo generateCsrfToken(); ?>">
                         <input type="hidden" name="claim_id" value="<?= $claim['id'] ?>">
                         <button type="submit" name="action" value="approve">Approve</button>
                         <button type="submit" name="action" value="reject">Reject</button>

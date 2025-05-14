@@ -1,5 +1,5 @@
 <?php
-session_start();
+include('../../../../server/includes/csrf_helper.php');;
 require_once('../../../../server/config/db.php');
 require_once('../../../../server/controller/ClaimController.php');
 require_once(__DIR__ . '/../../../../server/classes/postItem_class.php');
@@ -87,6 +87,7 @@ $claims = $claimController->getAllClaimsForAdmin(); // Or getPendingClaimsForPos
 
                     <form action="../../../../server/routes/approveRejectRoute.php" method="POST" class="claim-form">
                         <input type="hidden" name="claim_id" value="<?= $claim['id'] ?>">
+                        <input type="hidden" name="csrf_token" value="<?= generateCsrfToken() ?>">
                         <div class="card-actions">
                             <button type="submit" name="action" value="approve" class="btn btn-approve">
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
