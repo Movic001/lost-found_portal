@@ -1,23 +1,4 @@
-/* ==========================================
-           Base Styles & CSS Variables
-           ========================================== */
-:root {
-  --primary-color: #3498db;
-  --secondary-color: #2ecc71;
-  --background-color: #f4f6f9;
-  --card-bg: #ffffff;
-  --text-primary: #2c3e50;
-  --text-secondary: #7f8c8d;
-  --accent-color: #e74c3c;
-  --border-color: #ecf0f1;
-  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  --border-radius: 8px;
-  --spacing-sm: 10px;
-  --spacing-md: 20px;
-  --spacing-lg: 30px;
-}
-
-/* Reset and Base Styles */
+/* Reset & Base Styles */
 * {
   margin: 0;
   padding: 0;
@@ -26,252 +7,168 @@
 
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  line-height: 1.6;
-  color: var(--text-primary);
-  background-color: var(--background-color);
-  padding: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
+  background-color: #f8f9fa;
+  color: #333;
+  padding: 1rem;
 }
 
-/* ==========================================
-           Typography
-           ========================================== */
 h1 {
-  color: var(--primary-color);
   text-align: center;
-  margin-bottom: var(--spacing-lg);
-  font-size: 2.2rem;
-  font-weight: 600;
-  position: relative;
-  padding-bottom: 15px;
+  margin: 2rem 0;
+  font-size: 2rem;
 }
 
-h1::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100px;
-  height: 4px;
-  background-color: var(--primary-color);
+/* Navbar Styles */
+.navbar {
+  background-color: #4a63d5;
+  color: #fff;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.navbar h2 {
+  font-size: 1.2rem;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.navbar-links a {
+  color: #fff;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+.navbar-links a:hover {
+  background-color: #0066cc;
+}
+
+/* Hamburger icon styles */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.hamburger div {
+  width: 25px;
+  height: 3px;
+  background-color: #fff;
   border-radius: 2px;
 }
 
-p {
-  margin-bottom: var(--spacing-sm);
-  color: var(--text-primary);
-}
-
-strong {
-  color: var(--primary-color);
-  font-weight: 600;
-}
-
-/* ==========================================
-           Layout & Items
-           ========================================== */
 /* Item Card Container */
-div:not(.empty-state) {
-  background-color: var(--card-bg);
-  border-radius: var(--border-radius);
-  padding: var(--spacing-md);
-  margin-bottom: var(--spacing-md);
-  box-shadow: var(--shadow);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
-  border-left: 4px solid var(--primary-color);
+.item-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  gap: 1.5rem;
 }
 
-div:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+.item-card {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Status styling */
-.status-indicator {
-  position: absolute;
-  top: var(--spacing-sm);
-  right: var(--spacing-sm);
-  padding: 5px 10px;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  font-weight: bold;
-  color: white;
+.item-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.status-found {
-  background-color: var(--secondary-color);
+.item-card p {
+  margin-bottom: 0.5rem;
 }
 
-.status-pending {
-  background-color: #f39c12;
+.item-card p strong {
+  display: inline-block;
+  width: 120px;
 }
 
-.status-claimed {
-  background-color: var(--accent-color);
+.item-image {
+  width: 100%;
+  max-height: 250px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-bottom: 1rem;
 }
 
-/* Empty state styling */
-.empty-state {
-  text-align: center;
-  padding: var(--spacing-lg);
-  background-color: var(--card-bg);
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow);
-  margin-top: var(--spacing-lg);
-}
-
-.empty-state i {
-  font-size: 4rem;
-  color: var(--text-secondary);
-  margin-bottom: var(--spacing-md);
-}
-
-.empty-state p {
-  font-size: 1.2rem;
-  color: var(--text-secondary);
-}
-
-/* ==========================================
-           Buttons & Action Items
-           ========================================== */
+/* Action Buttons */
 .action-buttons {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: var(--spacing-md);
-  gap: var(--spacing-sm);
+  margin-top: 1rem;
 }
 
-a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px 16px;
-  border-radius: 4px;
+.action-buttons a {
+  display: inline-block;
   text-decoration: none;
-  font-weight: 500;
-  transition: all 0.2s ease;
-  color: white;
+  padding: 0.4rem 0.9rem;
+  margin-right: 0.5rem;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  transition: background 0.3s ease;
 }
 
-a:focus {
-  outline: 3px solid rgba(52, 152, 219, 0.5);
-  outline-offset: 2px;
+.action-buttons a:first-child {
+  background-color: #ffc107;
+  color: #000;
 }
 
-a:first-of-type {
-  background-color: var(--primary-color);
+.action-buttons a:first-child:hover {
+  background-color: #e0a800;
 }
 
-a:first-of-type:hover {
-  background-color: #2980b9;
+.action-buttons a:last-child {
+  background-color: #dc3545;
+  color: #fff;
 }
 
-a:last-of-type {
-  background-color: var(--accent-color);
+.action-buttons a:last-child:hover {
+  background-color: #c82333;
 }
 
-a:last-of-type:hover {
-  background-color: #c0392b;
-}
-
-a i {
-  margin-right: 6px;
-}
-
-hr {
-  display: none;
-  /* Hide the horizontal rule as we're using cards */
-}
-
-/* ==========================================
-           Responsive Design
-           ========================================== */
-@media screen and (max-width: 768px) {
-  body {
-    padding: 15px;
-  }
-
-  h1 {
-    font-size: 1.8rem;
-    margin-bottom: var(--spacing-md);
-  }
-
-  div {
-    padding: 15px;
-  }
-
-  .action-buttons {
+/* Responsive Design */
+@media (max-width: 768px) {
+  .navbar {
     flex-direction: column;
+    align-items: flex-start;
   }
 
-  a {
-    width: 100%;
-    margin-bottom: 8px;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  h1 {
-    font-size: 1.5rem;
-  }
-
-  body {
-    padding: 10px;
-  }
-
-  div {
-    padding: 12px;
-  }
-
-  p {
-    font-size: 14px;
-  }
-}
-
-/* ==========================================
-           Accessibility Enhancements
-           ========================================== */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
-}
-
-/* High contrast mode adjustments */
-@media (forced-colors: active) {
-  div {
-    border: 2px solid CanvasText;
-  }
-
-  a:focus {
-    outline: 2px solid CanvasText;
-  }
-}
-
-/* Print styles */
-@media print {
-  body {
-    background-color: white;
-    padding: 0;
-  }
-
-  div {
-    break-inside: avoid;
-    page-break-inside: avoid;
-    box-shadow: none;
-    border: 1px solid #ddd;
-  }
-
-  .action-buttons {
+  .navbar-links {
     display: none;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 1rem;
   }
+
+  .navbar-links.show {
+    display: flex;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .item-card {
+    padding: 1rem;
+  }
+
+  .item-card p strong {
+    width: 100px;
+  }
+}
+
+/* Accessibility Focus */
+a:focus {
+  outline: 2px dashed #000;
+  outline-offset: 3px;
 }

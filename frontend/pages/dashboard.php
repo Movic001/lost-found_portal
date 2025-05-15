@@ -154,18 +154,10 @@ $items = $foundItem->getAllItems();
             <div class="item-actions">
               <!-- check if the user is the owner of the post-->
               <?php if ($item['user_id'] === $_SESSION['user_id']): ?>
-                <a href="./editItem.php?id=<?php echo $item['id']; ?>"><button class="btn btn-edit">Edit</button></a>
-                <form method="POST" action="../../server/routes/deleteRoute.php" style="display:inline;">
-                  <input type="hidden" name="item_id" value="<?php echo $item['id']; ?>">
-                  <button class="btn btn-delete" onclick="return confirm('Delete this item?')">Delete</button>
-                </form>
+                <a href="./editItem.php?id=<?= $item['id'] ?>"><button class="btn btn-edit">Edit</button></a>
+                <a href="../../server/routes/deleteRoute.php?id=<?php echo $item['id']; ?>" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this item?')">Delete</a>
               <?php else: ?>
-                <form method="POST" action="claim_item.php" style="display:inline;">
-                  <input type="hidden" name="item_id" value="<?php echo $item['id']; ?>">
-
-                  <a href="../../server/routes/claimRoute.php?item_id=<?= $item['id'] ?>" class="btn btn-claim">Claim</a>
-
-                </form>
+                <a href="../../server/routes/claimRoute.php?item_id=<?= $item['id'] ?>" class="btn btn-claim">Claim</a>
               <?php endif; ?>
             </div>
           </div>
