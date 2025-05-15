@@ -100,4 +100,55 @@ class User
         $user = $this->getUserById($userId);
         return ($user && $user['role'] === 'admin');
     }
+
+
+    public function verifyUserRole($userId)
+    {
+        $query = "SELECT role FROM users WHERE id = :id LIMIT 1";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':id', $userId, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result ? $result['role'] : null;
+    }
+
+    // Add to User class
+    // public function verifyUserRole($userId)
+    // {
+    //     $stmt = $this->db->prepare("SELECT role FROM users WHERE id = :id");
+    //     $stmt->execute([':id' => $userId]);
+    //     return $stmt->fetchColumn();
+    // }
+
+    // public function validateSession()
+    // {
+    //     if (!isset($_SESSION['user_id'])) {
+    //         return false;
+    //     }
+
+    //     // Verify session matches database
+    //     $dbRole = $this->verifyUserRole($_SESSION['user_id']);
+    //     if ($dbRole !== $_SESSION['user_role']) {
+    //         // Update session if out of sync
+    //         $_SESSION['user_role'] = $dbRole;
+    //     }
+
+    //     return true;
+    // }
+    public function validateSession()
+    {
+        if (!isset($_SESSION['user_id'])) {
+            return false;
+        }
+
+        $dbRole = $this->verifyUserRole($_SESSION['user_id']);
+
+        // Optional: reject if session role has been tampered
+        if ($_SESSION['user_role'] !== $dbRole) {
+            $_SESSION['user_role'] = $dbRole; // Sync from DB
+        }
+
+        return true;
+    }
 }

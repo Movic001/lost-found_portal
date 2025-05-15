@@ -3,30 +3,30 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// Start session
+// Start session if not already started
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
+// Load required files
 require_once('../config/db.php');
 require_once('../includes/csrf_helper.php');
 require_once('../classes/user.php');
 require_once('../controller/ClaimController.php');
 
-// Debug: Log received POST data
-error_log("Received POST data: " . print_r($_POST, true));
-
-// Check authorization
+// Database and class instances
 $db = (new Database())->connect();
 $user = new User($db);
-if (!isset($_SESSION['user_id']) || !$user->isAdmin($_SESSION['user_id'])) {
+
+// ✅ Validate session and admin role
+if (!$user->validateSession() || $_SESSION['user_role'] !== 'admin') {
     die("<script>
         alert('Unauthorized access');
         window.location.href = '../../frontend/pages/login.html';
     </script>");
 }
 
-// Validate request
+// ✅ Ensure request is POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     die("<script>
         alert('Invalid request method');
@@ -34,63 +34,74 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     </script>");
 }
 
-// Check required parameters
+// ✅ Check required POST fields
 $required = ['claim_id', 'action', 'csrf_token'];
 foreach ($required as $field) {
-    if (!isset($_POST[$field])) {
-        error_log("Missing field: $field");
+    if (empty($_POST[$field])) {
         die("<script>
-            alert('Missing required parameters');
+            alert('Missing required parameters: $field');
             window.location.href = '../../frontend/pages/adminDashboard/pages/adminDashboard.php';
         </script>");
     }
 }
 
+// ✅ Main logic inside try block
 try {
     // Sanitize inputs
     $claimId = (int)$_POST['claim_id'];
-    $action = $_POST['action'] === 'approve' ? 'approved' : 'rejected';
+    $action = ($_POST['action'] === 'approve') ? 'approved' : 'rejected';
     $csrfToken = $_POST['csrf_token'];
 
-    // Verify CSRF token
+    // ✅ CSRF protection
     if (!verifyCsrfToken($csrfToken)) {
-        throw new Exception("Security token expired. Please refresh the page.");
+        throw new Exception("Invalid or expired security token. Please refresh the page and try again.");
     }
 
-    // Process claim
+    // ✅ Process claim action
     $claimController = new ClaimController($db);
-    if (!$claimController->updateClaimStatus($claimId, $action)) {
-        throw new Exception("Failed to update claim status");
+    $success = $claimController->updateClaimStatus($claimId, $action);
+    if (!$success) {
+        throw new Exception("Failed to update claim status.");
     }
 
-    // Handle role upgrade if approving
-    if ($action === 'approved') {
-        $claim = $claimController->getClaimById($claimId);
-        $userId = $claim['user_id'];
+    // ✅ Optional email notification logic
+    $claim = $claimController->getClaimById($claimId);
+    if ($claim) {
+        $email = $claim['email'] ?? '';
+        $itemName = $claim['item_name'] ?? 'your item';
+        $statusMessage = ($action === 'approved')
+            ? "Your claim for <b>$itemName</b> has been <b>approved</b>. Please contact the person who posted it."
+            : "Your claim for <b>$itemName</b> has been <b>rejected</b>. Please double-check your security answer or try again later.";
 
-        if (!$user->updateUserRole($userId, 'admin')) {
-            throw new Exception("Failed to update user role");
-        }
+        if (!empty($email)) {
+            $subject = "Claim $action - Lost & Found Portal";
+            $message = "
+                <html>
+                <head><title>$subject</title></head>
+                <body>
+                    <p>Hello,</p>
+                    <p>$statusMessage</p>
+                    <p>Thank you,<br>The Admin Team</p>
+                </body>
+                </html>
+            ";
+            $headers = "MIME-Version: 1.0\r\n";
+            $headers .= "Content-type:text/html;charset=UTF-8\r\n";
+            $headers .= "From: no-reply@campusportal.com\r\n";
 
-        // Special handling if admin approved their own claim
-        if ($_SESSION['user_id'] == $userId) {
-            session_unset();
-            session_destroy();
-            die("<script>
-                alert('Your account has been upgraded to admin. Please login again.');
-                window.location.href = '../../frontend/pages/login.html';
-            </script>");
+            // Send email
+            @mail($email, $subject, $message, $headers); // Use mail() or PHPMailer
         }
     }
 
-    // Success response
+    // ✅ Redirect with success
     echo "<script>
         alert('Claim {$action} successfully');
         window.location.href = '../../frontend/pages/adminDashboard/pages/claimNotification.php?status={$action}&claim_id={$claimId}';
     </script>";
     exit;
 } catch (Exception $e) {
-    error_log("Error in approveRejectRoutes: " . $e->getMessage());
+    error_log("Error in approveRejectRoute: " . $e->getMessage());
     echo "<script>
         alert('Error: " . addslashes($e->getMessage()) . "');
         window.location.href = '../../frontend/pages/adminDashboard/pages/adminDashboard.php';
