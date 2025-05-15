@@ -74,7 +74,7 @@ if (!empty($searchQuery) && empty($items)) {
               <a href="../../server/routes/deleteRoute.php?id=<?php echo $item['id']; ?>" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this item?')">Delete</a>
             <?php else: ?>
 
-              <a href="../../server/routes/claimRoute.php ?item_id=<?= $item['id'] ?>" class="btn btn-claim">Claim</a>
+              <a href="../../server/routes/claimRoute.php?item_id=<?= $item['id'] ?>" class="btn btn-claim">Claim</a>
 
             <?php endif; ?>
           </div>

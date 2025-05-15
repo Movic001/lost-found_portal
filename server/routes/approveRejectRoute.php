@@ -54,14 +54,29 @@ try {
 
     // ✅ CSRF protection
     if (!verifyCsrfToken($csrfToken)) {
-        throw new Exception("Invalid or expired security token. Please refresh the page and try again.");
+        // throw new Exception("Invalid or expired security token. Please refresh the page and try again.");
+        $alertTitle = "Invalid or expired security token!";
+        $alertText = "Please refresh the page and try again.";
+        $alertIcon = "error";
+        $alertButton = "OK";
+        $redirectUrl = "../../frontend/pages/adminDashboard/pages/adminDashboard.php";
+
+        include('../../frontend/pages/sweetAlert/alertTemplate.php');
+        exit;
     }
 
     // ✅ Process claim action
     $claimController = new ClaimController($db);
     $success = $claimController->updateClaimStatus($claimId, $action);
     if (!$success) {
-        throw new Exception("Failed to update claim status.");
+        //throw new Exception("Failed to update claim status.");
+        $alertTitle = "Failed to update claim status!";
+        $alertText = "Please try again later.";
+        $alertIcon = "error";
+        $alertButton = "OK";
+        $redirectUrl = "../../frontend/pages/adminDashboard/pages/adminDashboard.php";
+        include('../../frontend/pages/sweetAlert/alertTemplate.php');
+        exit;
     }
 
     // ✅ Optional email notification logic
@@ -95,16 +110,32 @@ try {
     }
 
     // ✅ Redirect with success
-    echo "<script>
-        alert('Claim {$action} successfully');
-        window.location.href = '../../frontend/pages/adminDashboard/pages/claimNotification.php?status={$action}&claim_id={$claimId}';
-    </script>";
+    // echo "<script>
+    //     alert('Claim {$action} successfully');
+    //     window.location.href = '../../frontend/pages/adminDashboard/pages/claimNotification.php?status={$action}&claim_id={$claimId}';
+    // </script>";
+    // exit;
+    $alertTitle = "Claim {$action} successfully!";
+    $alertText = "The claim has been {$action} successfully.";
+    $alertIcon = "success";
+    $alertButton = "OK";
+    $redirectUrl = "../../frontend/pages/adminDashboard/pages/claimNotification.php?status={$action}&claim_id={$claimId}";
+
+    include('../../frontend/pages/sweetAlert/alertTemplate.php');
     exit;
 } catch (Exception $e) {
-    error_log("Error in approveRejectRoute: " . $e->getMessage());
-    echo "<script>
-        alert('Error: " . addslashes($e->getMessage()) . "');
-        window.location.href = '../../frontend/pages/adminDashboard/pages/adminDashboard.php';
-    </script>";
+    // error_log("Error in approveRejectRoute: " . $e->getMessage());
+    // echo "<script>
+    //     alert('Error: " . addslashes($e->getMessage()) . "');
+    //     window.location.href = '../../frontend/pages/adminDashboard/pages/adminDashboard.php';
+    // </script>";
+    // exit;
+    $alertTitle = "Error";
+    $alertText = "An error occurred: " . $e->getMessage();
+    $alertIcon = "error";
+    $alertButton = "OK";
+    $redirectUrl = "../../frontend/pages/adminDashboard/pages/adminDashboard.php";
+
+    include('../../frontend/pages/sweetAlert/alertTemplate.php');
     exit;
 }

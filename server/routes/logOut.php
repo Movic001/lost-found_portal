@@ -24,10 +24,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logOut'])) {
             $params["httponly"]
         );
     }
-    echo "<script>alert('Logged out successfully'); window.location.href='../../frontend/pages/login.html';</script>";
+    $alertTitle = "Logged out successfully";
+    $alertText = "";
+    $alertIcon = "success";
+    $redirectUrl = '../../frontend/pages/login.html';
+
+    include(__DIR__ . '/../../frontend/pages/sweetAlert/alertTemplate.php');
     exit;
 } else {
-    header("HTTP/1.1 400 Bad Request");
-    echo json_encode(['status' => 'error', 'message' => 'Invalid request']);
+    // header("HTTP/1.1 400 Bad Request");
+    // echo json_encode(['status' => 'error', 'message' => 'Invalid request']);
+    // exit;
+    $alertTitle = "HTTP/1.1 400 Bad Request";
+    $alertText = "Invalid request";
+    $alertIcon = "error";
+    $redirectUrl = '../../frontend/pages/login.html';
+
+    include(__DIR__ . '/../../frontend/pages/sweetAlert/alertTemplate.php');
     exit;
 }

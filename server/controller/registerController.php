@@ -30,16 +30,48 @@ class RegisterController
             try {
                 if ($user->register($formData)) {
                     // Redirect to login page on success
-                    header("Location: ../../frontend/pages/login.html");
-                    exit();
+                    // header("Location: ../../frontend/pages/login.html");
+                    // exit();
+                    $alertTitle = "Registration succcefully completed";
+                    $alertText = "You can now log in with your credentials.";
+                    $alertIcon = "success";
+                    $redirectUrl = '../../frontend/pages/login.html';
+                    $alertButton = "OK";
+
+                    include(__DIR__ . '/../../frontend/pages/sweetAlert/alertTemplate.php');
+                    exit;
                 } else {
-                    echo "<script>alert('❌ Registration failed. Email might be taken.');</script>";
+                    //echo "<script>alert('❌ Registration failed. Email might be taken.');</script>";
+                    $alertTitle = "Registration failed";
+                    $alertText = "Email might be taken.";
+                    $alertIcon = "error";
+                    $redirectUrl = '../../frontend/pages/register.html';
+                    $alertButton = "OK";
+
+                    include(__DIR__ . '/../../frontend/pages/sweetAlert/alertTemplate.php');
+                    exit;
                 }
             } catch (PDOException $e) {
-                echo "<script>alert('Error: " . $e->getMessage() . "');</script>";
+                //echo "<script>alert('Error: " . $e->getMessage() . "');</script>";
+                $alertTitle = "Error";
+                $alertText = "An error occurred during registration.";
+                $alertIcon = "error";
+                $redirectUrl = '../../frontend/pages/register.html';
+                $alertButton = "OK";
+
+                include(__DIR__ . '/../../frontend/pages/sweetAlert/alertTemplate.php');
+                exit;
             }
         } else {
-            echo "<script>alert('Invalid request'); window.location.href='../../frontend/html/register.html';</script>";
+            // echo "<script>alert('Invalid request'); window.location.href='../../frontend/html/register.html';</script>";
+            // exit;
+            $alertTitle = "Invalid request";
+            $alertText = "Invalid request";
+            $alertIcon = "error";
+            $redirectUrl = '../../frontend/pages/register.html';
+            $alertButton = "OK";
+            include(__DIR__ . '/../../frontend/pages/sweetAlert/alertTemplate.php');
+            exit;
         }
     }
 }

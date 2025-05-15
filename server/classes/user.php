@@ -17,7 +17,14 @@ class User
         $existingUser = $stmt->fetch();
 
         if ($existingUser) {
-            throw new Exception("Email already exists");
+            // throw new Exception("Email already exists");
+            $alertTitle = "Email already exists";
+            $alertText = "Please use a different email.";
+            $alertIcon = "error";
+
+            $redirectUrl = '../../frontend/pages/register.html';
+            include(__DIR__ . '/../../frontend/pages/sweetAlert/alertTemplate.php');
+            exit;
         }
 
         // Hash password
@@ -65,7 +72,14 @@ class User
     {
         $allowedRoles = ['user', 'admin'];
         if (!in_array($newRole, $allowedRoles)) {
-            throw new Exception("Invalid role specified");
+            // throw new Exception("Invalid role specified");
+            $alertTitle = "Invalid role specified";
+            $alertText = "Please select a valid role.";
+            $alertIcon = "error";
+            $redirectUrl = '../../frontend/pages/adminDashboard/pages/adminDashboard.php';
+
+            include(__DIR__ . '/../../frontend/pages/sweetAlert/alertTemplate.php');
+            exit;
         }
 
         $stmt = $this->db->prepare("UPDATE users SET role = :role WHERE id = :id");

@@ -25,10 +25,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
     $file = $_FILES['image_path'] ?? null;
 
     if ($editItemController->updateItem($data, $file)) {
-        echo "<script>alert('Item updated successfully'); window.location.href='../../frontend/pages/view_items.php';</script>";
+        // echo "<script>alert('Item updated successfully'); window.location.href='../../frontend/pages/view_items.php';</script>";
+        $alertTitle = "Item updated successfully!";
+        $alertText = "Your item has been updated.";
+        $alertIcon = "success";
+        $redirectUrl = '../../frontend/pages/view_items.php';
+        $alertButton = "OK";
+
+        include('../../frontend/pages/sweetAlert/alertTemplate.php');
+        exit;
     } else {
-        echo "<script>alert('Failed to update item.'); window.history.back();</script>";
+        //echo "<script>alert('Failed to update item.'); window.history.back();</script>";
+        $alertTitle = "Update Failed!";
+        $alertText = "There was an error updating the item.";
+        $alertIcon = "error";
+        $redirectUrl = '../../frontend/pages/view_items.php';
+        $alertButton = "OK";
+
+        include('../../frontend/pages/sweetAlert/alertTemplate.php');
+        exit;
     }
 } else {
-    echo "<script>alert('Invalid request.'); window.history.back();</script>";
+    //echo "<script>alert('Invalid request.'); window.history.back();</script>";
+    $alertTitle = "Invalid request!";
+    $alertText = "Please check the request method.";
+    $alertIcon = "error";
+    $redirectUrl = '../../frontend/pages/view_items.php';
+    $alertButton = "OK";
+
+    include('../../frontend/pages/sweetAlert/alertTemplate.php');
+    exit;
 }

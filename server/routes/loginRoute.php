@@ -12,5 +12,12 @@ $db = $database->connect();
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     require_once(__DIR__ . '/../controller/loginController.php');
 } else {
-    echo "<script>alert('Invalid route!'); window.location.href='../../frontend/pages/login.html';</script>";
+    // If the request method is not POST, show an error message
+    $alertTitle = "Invalid route!";
+    $alertText = "Please use the correct route.";
+    $alertIcon = "error";
+    $redirectUrl = '../../frontend/pages/login.html';
+
+    include(__DIR__ . '/../../frontend/pages/sweetAlert/alertTemplate.php');
+    exit;
 }
