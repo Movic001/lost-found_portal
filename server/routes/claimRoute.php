@@ -29,7 +29,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['item_id'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['claim_request'])) {
     try {
         if (!isset($_SESSION['user_id'])) {
-            throw new Exception("You must be logged in to submit a claim.");
+            //throw new Exception("You must be logged in to submit a claim.");
+            $alertTitle = "Login Required";
+            $alertText = "You must be logged in to submit a claim.";
+            $alertIcon = "warning";
+            $redirectUrl = '../../frontend/pages/login.php';
+            $alertButton = "OK";
+
+            include(__DIR__ . '/../../frontend/pages/sweetAlert/alertTemplate.php');
+            exit;
         }
 
         $data = [
@@ -42,15 +50,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['claim_request'])) {
 
         if ($claimController->submitClaim($data)) {
             // run an alert with a success message and redirect to notification page
-            echo "<script>alert('Claim submitted successfully!');</script>";
-            header("Location: ../../frontend/pages/claimResult.php?status=pending");
+            // echo "<script>alert('Claim submitted successfully!');</script>";
+            // header("Location: ../../frontend/pages/claimResult.php?status=pending");
+            // exit;
+
+            $alertTitle = "Claim submitted successfully!";
+            $alertText = "Your claim is pending review.";
+            $alertIcon = "success";
+            $redirectUrl = '../../frontend/pages/claimResult.php?status=pending';
+            $alertButton = "OK";
+            include(__DIR__ . '/../../frontend/pages/sweetAlert/alertTemplate.php');
             exit;
         } else {
-            throw new Exception("Failed to submit claim.");
+            //throw new Exception("Failed to submit claim.");
+            $alertTitle = "Failed to submit claim";
+            $alertText = "Please try again.";
+            $alertIcon = "error";
+            $redirectUrl = '../../frontend/pages/claim.php?item_id=' . $_POST['item_id'];
+            $alertButton = "OK";
+
+            include(__DIR__ . '/../../frontend/pages/sweetAlert/alertTemplate.php');
+            exit;
         }
     } catch (Exception $e) {
         echo "Error: " . $e->getMessage();
     }
 } else {
-    echo "Invalid request method.";
+    //echo "Invalid request method.";
+    $alertTitle = "Invalid request";
+    $alertText = "Please try again.";
+    $alertIcon = "error";
+    $redirectUrl = '../../frontend/pages/claim.php?item_id=' . $_POST['item_id'];
+    $alertButton = "OK";
+
+    include(__DIR__ . '/../../frontend/pages/sweetAlert/alertTemplate.php');
+    exit;
 }
