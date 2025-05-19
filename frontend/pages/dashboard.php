@@ -15,6 +15,15 @@ $db = $database->connect(); // ✅ Get the PDO connection
 $foundItem = new FoundItem($db);
 $items = $foundItem->getAllItems();
 
+
+$foundItemController = new FoundItem($db);
+// Fetch only the current user's items
+$userId = $_SESSION['user_id'];
+$userItems = $foundItemController->getItemsByUserId($userId);
+$postCount = count($userItems);
+$claimedCount = $foundItemController->countClaimedItemsByUser($userId);
+$unclaimedCount = $foundItemController->countUnclaimedItemsByUser($userId);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -117,20 +126,20 @@ $items = $foundItem->getAllItems();
     </div>
 
     <div class="stats-section">
-      <div class="stat-card">
+      <!--div class="stat-card">
         <div class="stat-number">24</div>
         <div class="stat-label">Total Items Found</div>
-      </div>
+      </div-->
       <div class="stat-card">
-        <div class="stat-number">16</div>
+        <div class="stat-number"><?php echo $claimedCount; ?></div>
         <div class="stat-label">Items Claimed</div>
       </div>
       <div class="stat-card">
-        <div class="stat-number">8</div>
+        <div class="stat-number"><?php echo $unclaimedCount; ?></div>
         <div class="stat-label">Still Unclaimed</div>
       </div>
       <div class="stat-card">
-        <div class="stat-number">30</div>
+        <div class="stat-number"><?php echo $postCount; ?></div>
         <div class="stat-label">Your Posts</div>
       </div>
     </div>
@@ -155,7 +164,7 @@ $items = $foundItem->getAllItems();
               <!-- check if the user is the owner of the post-->
               <?php if ($item['user_id'] === $_SESSION['user_id']): ?>
                 <a href="./editItem.php?id=<?= $item['id'] ?>"><button class="btn btn-edit">Edit</button></a>
-                <a href="../../server/routes/deleteRoute.php?id=<?php echo $item['id']; ?>" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this item?')">Delete</a>
+                <a href="../../server/routes/deleteRoute.php?id=<?php echo $item['id']; ?>" class="btn btn-delete">Delete</a>
               <?php else: ?>
                 <a href="../../server/routes/claimRoute.php?item_id=<?= $item['id'] ?>" class="btn btn-claim">Claim</a>
               <?php endif; ?>

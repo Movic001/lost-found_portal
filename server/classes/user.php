@@ -127,29 +127,6 @@ class User
         return $result ? $result['role'] : null;
     }
 
-    // Add to User class
-    // public function verifyUserRole($userId)
-    // {
-    //     $stmt = $this->db->prepare("SELECT role FROM users WHERE id = :id");
-    //     $stmt->execute([':id' => $userId]);
-    //     return $stmt->fetchColumn();
-    // }
-
-    // public function validateSession()
-    // {
-    //     if (!isset($_SESSION['user_id'])) {
-    //         return false;
-    //     }
-
-    //     // Verify session matches database
-    //     $dbRole = $this->verifyUserRole($_SESSION['user_id']);
-    //     if ($dbRole !== $_SESSION['user_role']) {
-    //         // Update session if out of sync
-    //         $_SESSION['user_role'] = $dbRole;
-    //     }
-
-    //     return true;
-    // }
     public function validateSession()
     {
         if (!isset($_SESSION['user_id'])) {

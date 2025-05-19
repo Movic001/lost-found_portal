@@ -165,4 +165,25 @@ class FoundItem
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    //
+    public function countClaimedItemsByUser($userId)
+    {
+        $query = "SELECT COUNT(*) as total FROM found_items WHERE user_id = :user_id AND status = 'claimed'";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row['total'] ?? 0;
+    }
+
+    public function countUnclaimedItemsByUser($userId)
+    {
+        $query = "SELECT COUNT(*) as total FROM found_items WHERE user_id = :user_id AND status = 'available'";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row['total'] ?? 0;
+    }
 }

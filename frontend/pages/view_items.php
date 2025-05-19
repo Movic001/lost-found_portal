@@ -71,7 +71,7 @@ if (!empty($searchQuery) && empty($items)) {
           <div class="item-actions">
             <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == $item['user_id']): ?>
               <a href="./editItem.php?id=<?= $item['id'] ?>" class="btn btn-edit">Edit</a>
-              <a href="../../server/routes/deleteRoute.php?id=<?php echo $item['id']; ?>" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this item?')">Delete</a>
+              <a href="../../server/routes/deleteRoute.php?id=<?php echo $item['id']; ?>" class="btn btn-delete">Delete</a>
             <?php else: ?>
 
               <a href="../../server/routes/claimRoute.php?item_id=<?= $item['id'] ?>" class="btn btn-claim">Claim</a>
