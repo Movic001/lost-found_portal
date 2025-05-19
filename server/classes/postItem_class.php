@@ -166,7 +166,7 @@ class FoundItem
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    //
+
     public function countClaimedItemsByUser($userId)
     {
         $query = "SELECT COUNT(*) as total FROM found_items WHERE user_id = :user_id AND status = 'claimed'";

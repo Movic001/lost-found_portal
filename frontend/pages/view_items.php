@@ -55,7 +55,7 @@ if (!empty($searchQuery) && empty($items)) {
     <?php foreach ($items as $item): ?>
       <div class="item-card">
         <?php if (!empty($item['image_path'])): ?>
-          <img src="../uploads/<?php echo htmlspecialchars(basename($item['image_path'])); ?>" alt="Item Image" class="item-image" />
+          <img loading="lazy" src="../uploads/<?php echo htmlspecialchars(basename($item['image_path'])); ?>" alt="Item Image" class="item-image" />
         <?php endif; ?>
 
         <div class="item-info">
